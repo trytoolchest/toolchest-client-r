@@ -121,7 +121,6 @@ upload <- function(input_path = NULL, token) {
   }
   message(input_path)
 
-  message(token$input_url)
   update_status("transferring_from_client", token)
 
   cat("Uploading (this may take a few moments)...\n")
