@@ -5,16 +5,16 @@
 #' (For a specific tool, call toolchest::toolname() instead. This function
 #' is used for processing queries and should not be called by the user itself.)
 #'
-#' @param tool_name Toolchest tool_name to use (e.g., cutadapt).
-#' Internal note: this is the pipeline segment name, not just the tool name.
-#' (TODO: Resolve this naming discrepancy)
+#' @param tool_name Toolchest tool name to use (e.g., cutadapt).
+#' @param tool_version Toolchest tool version.
 #' @param tool_args Custom arguments given to function.
 #' @param input_path Local path of input file (to be uploaded to AWS).
 #' @param output_path Local path of output file (downloaded from AWS).
 #' @param input_name Name of input file inside input AWS S3 bucket.
 #' @param output_name Name of output file to be uploaded to output AWS S3 bucket.
 #' @export
-query <- function(tool_name, tool_args, input_path, output_path, input_name, output_name) {
+query <- function(tool_name, tool_version, tool_args, input_path, output_path,
+                  input_name, output_name) {
   # Confirm authentication
   key <- Sys.getenv("TOOLCHEST_KEY")
   if (identical(key, "")) {
@@ -31,8 +31,8 @@ query <- function(tool_name, tool_args, input_path, output_path, input_name, out
   # Get info from initial POST response
   tryCatch(
     {
-      token <- get_token(tool_name, tool_args, input_name, output_name,
-                         base_url, pipeline_url, headers)
+      token <- get_token(tool_name, tool_version, tool_args, input_name,
+                         output_name, base_url, pipeline_url, headers)
     },
     error = function(cnd) {
       stop(cnd$message, call. = FALSE)
@@ -67,12 +67,12 @@ query <- function(tool_name, tool_args, input_path, output_path, input_name, out
   )
 }
 
-get_token <- function(tool_name, tool_args, input_name, output_name,
-                      base_url, pipeline_url, headers) {
+get_token <- function(tool_name, tool_version, tool_args, input_name,
+                      output_name, base_url, pipeline_url, headers) {
   api_url <- paste(base_url, pipeline_url, sep = "")
   create_body <- list(
     tool_name = tool_name,
-    tool_version = "1.0",
+    tool_version = tool_version,
     database_name = NULL,
     database_version = NULL,
     input_file_name = input_name,

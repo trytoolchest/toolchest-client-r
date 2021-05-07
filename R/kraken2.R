@@ -15,5 +15,5 @@
 #' @export
 kraken2 <- function(kraken2_args = "", input_path = NULL, output_path = NULL,
                      input_name = "input.fastq", output_name = "output.fastq") {
-  toolchest::query("kraken_2_1_1_default_db", kraken2_args, input_path, output_path, input_name, output_name)
+  toolchest::query("kraken", "2.1.1", kraken2_args, input_path, output_path, input_name, output_name)
 }

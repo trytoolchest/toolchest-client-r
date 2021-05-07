@@ -23,5 +23,5 @@
 #' @export
 cutadapt <- function(cutadapt_args, input_path = NULL, output_path = NULL,
                      input_name = "input.fastq", output_name = "output.fastq") {
-  toolchest::query("cutadapt", cutadapt_args, input_path, output_path, input_name, output_name)
+  toolchest::query("cutadapt", "1.0", cutadapt_args, input_path, output_path, input_name, output_name)
 }

@@ -4,12 +4,20 @@
 \alias{query}
 \title{Toolchest Client Query}
 \usage{
-query(tool_name, tool_args, input_path, output_path, input_name, output_name)
+query(
+  tool_name,
+  tool_version,
+  tool_args,
+  input_path,
+  output_path,
+  input_name,
+  output_name
+)
 }
 \arguments{
-\item{tool_name}{Toolchest tool_name to use (e.g., cutadapt).
-Internal note: this is the pipeline segment name, not just the tool name.
-(TODO: Resolve this naming discrepancy)}
+\item{tool_name}{Toolchest tool name to use (e.g., cutadapt).}
+
+\item{tool_version}{Toolchest tool version.}
 
 \item{tool_args}{Custom arguments given to function.}
 
