@@ -198,7 +198,6 @@ download <- function(output_path = NULL, token) {
 
   update_status("transferring_to_client", token)
 
-  message(signed_url)
   cat("Downloading (this may take a few moments)...\n")
   download_response <- httr::GET(
     url = signed_url,
