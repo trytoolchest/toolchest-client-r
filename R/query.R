@@ -24,7 +24,7 @@ query <- function(tool_name, tool_version, tool_args, input_path, output_path,
     )
   }
 
-  base_url <- "https://8234cbfe6cdb.ngrok.io" #"http://toolchest.us-east-1.elasticbeanstalk.com"
+  base_url <- "http://toolchest.us-east-1.elasticbeanstalk.com"
   pipeline_url <- "/pipeline-segment-instances"
   headers <- httr::add_headers(Authorization = paste("Key", key))
 
