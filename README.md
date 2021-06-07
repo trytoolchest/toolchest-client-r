@@ -11,7 +11,9 @@ It allows you to abstract away the costliness of running tools on your
 own resources by running the same jobs on secure, powerful remote
 servers.
 
-This package contains the R client for using Toolchest.
+This package contains the **R** client for using Toolchest. For the
+**Python** client, [see
+here](https://github.com/trytoolchest/toolchest-client-python).
 
 ## Usage
 
