@@ -151,6 +151,15 @@ update_status <- function(new_status, token) {
     encode = "json"
   )
   if (httr::status_code(response) != 200) {
+    response_content <- httr::content(response, "parsed", encoding = "UTF-8")
+
+    # Check if there are specific errors (e.g., data limits).
+    if ("success" %in% names(response_content)) {
+      if (!response_content$success) {
+        stop(response_content$error, call. = FALSE)
+      }
+    }
+
     stop(paste("Unsuccessful task status update."), call. = FALSE)
   }
 }
