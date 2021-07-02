@@ -73,6 +73,7 @@ get_token <- function(tool_name, tool_version, tool_args, input_name,
   create_body <- list(
     tool_name = tool_name,
     tool_version = tool_version,
+    custom_tool_args = tool_args,
     database_name = NULL,
     database_version = NULL,
     input_file_name = input_name,
