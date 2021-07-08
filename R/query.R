@@ -31,8 +31,10 @@ query <- function(tool_name, tool_version, tool_args, input_path, output_path,
   # Get info from initial POST response
   tryCatch(
     {
-      token <- get_token(tool_name, tool_version, tool_args, input_name,
-                         output_name, base_url, pipeline_url, headers)
+      token <- get_token(
+        tool_name, tool_version, tool_args, input_name,
+        output_name, base_url, pipeline_url, headers
+      )
     },
     error = function(cnd) {
       stop(cnd$message, call. = FALSE)

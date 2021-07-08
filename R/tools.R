@@ -12,7 +12,7 @@
 #' @param tool_args (optional) Additional arguments to be passed to Bowtie 2.
 #'
 #' @export
-bowtie2 <- function(inputs = NULL, output_path = NULL, database_name, database_version, tool_args="") {
+bowtie2 <- function(inputs = NULL, output_path = NULL, database_name, database_version, tool_args = "") {
   inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
   toolchest_client$bowtie2(inputs, output_path, database_name, database_version, tool_args)

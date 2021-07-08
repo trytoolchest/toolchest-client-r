@@ -1,5 +1,9 @@
 #' Installs and loads the `toolchest_client` Python package when loading
 #' the R package.
+#'
+#' Note: The Python package interface is stored in the global variable `toolchest_client`.
+#'
+#'
 .onLoad <- function(libname, pkgname) {
   packageStartupMessage("Installing Toolchest client... ")
 
