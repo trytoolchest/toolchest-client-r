@@ -69,9 +69,9 @@ kraken2 <- function(inputs = NULL, output_path = NULL, tool_args = "") {
 #'
 #' Run a test pipeline segment via Toolchest. A plain text file containing 'success' is returned."
 #'
-#' @param tool_args Additional arguments, present to maintain a consistent interface. This is disregarded.
 #' @param inputs Path or list of paths (client-side) to be passed in as input.
 #' @param output_path Path (client-side) where the output file will be downloaded.
+#' @param tool_args Additional arguments, present to maintain a consistent interface. This is disregarded.
 #'
 #' @export
 test <- function(inputs = NULL, output_path = NULL, tool_args = "") {
