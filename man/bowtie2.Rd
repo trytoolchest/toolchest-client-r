@@ -13,15 +13,15 @@ bowtie2(
 )
 }
 \arguments{
+\item{inputs}{Path or list of paths (client-side) to be passed in as input.}
+
+\item{output_path}{Path (client-side) where the output file will be downloaded.}
+
 \item{database_name}{Name (string) of database to use for Bowtie 2 alignment.}
 
 \item{database_version}{Version (string) of database to use for Bowtie 2 alignment.}
 
 \item{tool_args}{(optional) Additional arguments to be passed to Bowtie 2.}
-
-\item{inputs:}{Path or list of paths (client-side) to be passed in as input.}
-
-\item{output_path:}{Path (client-side) where the output file will be downloaded.}
 }
 \description{
 Starts a query for Bowtie 2 (for alignment) using Toolchest.

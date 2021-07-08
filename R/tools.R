@@ -5,8 +5,8 @@
 #' If left unspecified, inputs and output_path can be selected by the user
 #' manually.
 #'
-#' @param inputs: Path or list of paths (client-side) to be passed in as input.
-#' @param output_path: Path (client-side) where the output file will be downloaded.
+#' @param inputs Path or list of paths (client-side) to be passed in as input.
+#' @param output_path Path (client-side) where the output file will be downloaded.
 #' @param database_name Name (string) of database to use for Bowtie 2 alignment.
 #' @param database_version Version (string) of database to use for Bowtie 2 alignment.
 #' @param tool_args (optional) Additional arguments to be passed to Bowtie 2.

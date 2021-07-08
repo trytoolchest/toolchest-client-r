@@ -8,6 +8,5 @@ the R package.}
 .onLoad(libname, pkgname)
 }
 \description{
-Installs and loads the \code{toolchest_client} Python package when loading
-the R package.
+Note: The Python package interface is stored in the global variable \code{toolchest_client}.
 }
