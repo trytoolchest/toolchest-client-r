@@ -4,24 +4,14 @@
 \alias{cutadapt}
 \title{Cutadapt Client}
 \usage{
-cutadapt(
-  cutadapt_args,
-  input_path = NULL,
-  output_path = NULL,
-  input_name = "input.fastq",
-  output_name = "output.fastq"
-)
+cutadapt(inputs = NULL, output_path = NULL, tool_args)
 }
 \arguments{
-\item{cutadapt_args}{Custom arguments given to function (e.g., adapters: "-a AATTCCGG").}
+\item{inputs}{Path or list of paths (client-side) to be passed in as input.}
 
-\item{input_path}{Local path of input file (to be uploaded to AWS).}
+\item{output_path}{Path (client-side) where the output file will be downloaded.}
 
-\item{output_path}{Local path of output file (to be downloaded from AWS).}
-
-\item{input_name}{Name of input file inside input AWS S3 bucket.}
-
-\item{output_name}{Name of output file to be uploaded to output AWS S3 bucket.}
+\item{tool_args}{Additional arguments to be passed to Cutadapt.}
 }
 \description{
 Starts a query for Cutadapt using Toolchest.
@@ -30,13 +20,13 @@ Starts a query for Cutadapt using Toolchest.
 Currently, only a single .fastq file is supported as input.
 The output will be downloaded to output_path if specified.
 
-If left unspecified, input_path and output_path can be selected by the user
-manually while running the cutadapt() function.
+If left unspecified, inputs and output_path can be selected by the user
+manually.
 }
 \examples{
 \dontrun{
-cutadapt("-a AATTCCGG")
-cutadapt("-a AATTCCGG", input_path = "C://Users/YourName/Documents/my_input_file.fastq")
+cutadapt(tool_args = "-a AATTCCGG")
+cutadapt(input_path = "C://Users/YourName/Documents/my_input_file.fastq", tool_args = "-a AATTCCGG")
 }
 
 }

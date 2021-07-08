@@ -5,49 +5,44 @@
 #' Currently, only a single .fastq file is supported as input.
 #' The output will be downloaded to output_path if specified.
 #'
-#' If left unspecified, input_path and output_path can be selected by the user
-#' manually while running the cutadapt() function.
+#' If left unspecified, inputs and output_path can be selected by the user
+#' manually.
 #'
-#' @param tool_args Custom arguments given to function (e.g., adapters: "-a AATTCCGG").
-#' @param input_path Local path of input file (to be uploaded to AWS).
-#' @param output_path Local path of output file (to be downloaded from AWS).
-#' @param input_name Name of input file inside input AWS S3 bucket.
-#' @param output_name Name of output file to be uploaded to output AWS S3 bucket.
+#' @param inputs Path or list of paths (client-side) to be passed in as input.
+#' @param output_path Path (client-side) where the output file will be downloaded.
+#' @param tool_args Additional arguments to be passed to Cutadapt.
 #'
 #' @examples
 #' \dontrun{
-#' cutadapt("-a AATTCCGG")
-#' cutadapt("-a AATTCCGG", input_path = "C://Users/YourName/Documents/my_input_file.fastq")
+#' cutadapt(tool_args = "-a AATTCCGG")
+#' cutadapt(input_path = "C://Users/YourName/Documents/my_input_file.fastq", tool_args = "-a AATTCCGG")
 #' }
 #'
 #' @export
-cutadapt <- function(tool_args, input_path = NULL, output_path = NULL,
-                     input_name = "input.fastq", output_name = "output.fastq") {
-  toolchest::query("cutadapt", "3.4", cutadapt_args, input_path, output_path, input_name, output_name)
+cutadapt <- function(inputs = NULL, output_path = NULL, tool_args) {
+  inputs <- .validate.inpath(inputs)
+  output_path <- .validate.outpath(output_path)
+  toolchest_client$cutadapt(inputs, output_path, tool_args)
 }
 
 #' Kraken 2 Client
 #'
 #' Starts a query for Kraken 2 using Toolchest.
 #'
-#' If left unspecified, input_path and output_path can be selected by the user
-#' manually while running the kraken2() function.
+#' (Currently, only single .fastq inputs are supported.)
 #'
-#' @param tool_args Custom arguments given to function.
-#' @param input_path Local path of input file (to be uploaded to AWS).
-#' @param output_path Local path of output file (to be downloaded from AWS).
-#' @param input_name Name of input file inside input AWS S3 bucket.
-#' @param output_name Name of output file to be uploaded to output AWS S3 bucket.
+#' If left unspecified, inputs and output_path can be selected by the user
+#' manually.
+#'
+#' @param inputs Path or list of paths (client-side) to be passed in as input.
+#' @param output_path Path (client-side) where the output will be downloaded.
+#' @param tool_args (optional) Additional arguments to be passed to Kraken 2.
 #'
 #'
 #' @export
-kraken2 <- function(tool_args = "", input_path = NULL, output_path = NULL,
-                    input_name = "input.fastq", output_name = "output.fastq") {
-  toolchest::query(
-    "kraken",
-    "2.1.1",
-    kraken2_args,
-    input_path,
-    output_path, input_name, output_name)
+kraken2 <- function(inputs = NULL, output_path = NULL, tool_args = "") {
+  inputs <- .validate.inpath(inputs)
+  output_path <- .validate.outpath(output_path)
+  toolchest_client$kraken2(inputs, output_path, tool_args)
 }
 

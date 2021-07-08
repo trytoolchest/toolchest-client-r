@@ -4,29 +4,21 @@
 \alias{kraken2}
 \title{Kraken 2 Client}
 \usage{
-kraken2(
-  kraken2_args = "",
-  input_path = NULL,
-  output_path = NULL,
-  input_name = "input.fastq",
-  output_name = "output.fastq"
-)
+kraken2(inputs = NULL, output_path = NULL, tool_args = "")
 }
 \arguments{
-\item{kraken2_args}{Custom arguments given to function.}
+\item{inputs}{Path or list of paths (client-side) to be passed in as input.}
 
-\item{input_path}{Local path of input file (to be uploaded to AWS).}
+\item{output_path}{Path (client-side) where the output will be downloaded.}
 
-\item{output_path}{Local path of output file (to be downloaded from AWS).}
-
-\item{input_name}{Name of input file inside input AWS S3 bucket.}
-
-\item{output_name}{Name of output file to be uploaded to output AWS S3 bucket.}
+\item{tool_args}{(optional) Additional arguments to be passed to Kraken 2.}
 }
 \description{
 Starts a query for Kraken 2 using Toolchest.
 }
 \details{
-If left unspecified, input_path and output_path can be selected by the user
-manually while running the kraken2() function.
+(Currently, only single .fastq inputs are supported.)
+
+If left unspecified, inputs and output_path can be selected by the user
+manually.
 }
