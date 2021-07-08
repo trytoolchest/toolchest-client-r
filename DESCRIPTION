@@ -18,7 +18,8 @@ RoxygenNote: 7.1.1
 URL: https://github.com/gotoolchest/toolchest-client-r
 BugReports: https://github.com/gotoolchest/toolchest-client-r/issues
 Imports:
-    httr
+    httr,
+    reticulate
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
