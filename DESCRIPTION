@@ -5,8 +5,11 @@ Authors@R:
     person(given = "Bryce",
            family = "Cai",
            role = c("aut", "cre"),
-           email = "noah@toolche.st",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "bcai@trytoolchest.com"),
+    person(given = "Noah",
+           family = "Lebovic",
+           role = "ctb",
+           email = "nlebovic@trytoolchest.com")
 Description: Toolchest client for R. Provides queries for bioinformatics and
              data science tools using the Toolchest API.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
