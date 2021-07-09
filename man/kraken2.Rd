@@ -4,14 +4,14 @@
 \alias{kraken2}
 \title{Kraken 2 Client}
 \usage{
-kraken2(inputs = NULL, output_path = NULL, tool_args = "")
+kraken2(tool_args = "", inputs = NULL, output_path = NULL)
 }
 \arguments{
+\item{tool_args}{(optional) Additional arguments to be passed to Kraken 2.}
+
 \item{inputs}{Path or list of paths (client-side) to be passed in as input.}
 
 \item{output_path}{Path (client-side) where the output will be downloaded.}
-
-\item{tool_args}{(optional) Additional arguments to be passed to Kraken 2.}
 }
 \description{
 Starts a query for Kraken 2 using Toolchest.
