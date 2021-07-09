@@ -32,7 +32,7 @@ Input and output paths can be specified as well:
 ``` r
 toolchest::tool_name(
     tool_args,
-    input_path = "/path/to/input",
+    inputs = "/path/to/input",
     output_path = "/path/to/output"
 )
 ```
@@ -47,6 +47,9 @@ Toolchest currently supports the following tools:
 -   Bowtie 2 (`bowtie2`)
 -   Cutadapt (`cutadapt`)
 -   Kraken 2 (`kraken2`)
+
+A `test` function is also supplied, which mimics how using a tool would
+work in Toolchest.
 
 ## Installation
 
