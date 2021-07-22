@@ -79,3 +79,30 @@ test <- function(tool_args = "", inputs = NULL, output_path = NULL) {
   output_path <- .validate.outpath(output_path)
   toolchest_client$test(inputs, output_path, tool_args)
 }
+
+#' Unicycler Client
+#'
+#' Runs Unicycler via Toolchest.
+#'
+#' @note If any of `read_one`, `read_two`, or `long_reads` are unspecified, Toolchest
+#' will assume that they are intended to be blank, unlike other tools. At least
+#' one input filepath is needed for Toolchest to run Unicycler.
+#'
+#' The output path is needed. An option will pop up to select a filepath
+#' if `output_path` is unspecified.
+#'
+#' @param tool_args (optional) Additional arguments to be passed to Unicycler.
+#' @param read_one Path of input file (FASTQ) to be passed in as Read 1 (-1).
+#' @param read_two Path of input file (FASTQ) to be passed in as Read 2 (-2).
+#' @param long_reads Path of input file (FASTA) to be passed in as long reads (-l).
+#' @param output_path Path (client-side) where the output file will be downloaded.
+#'
+#' @export
+unicycler <- function(tool_args = "", read_one = NULL, read_two = NULL, long_reads = NULL, output_path = NULL) {
+
+  if (is.null(read_one) && is.null(read_two) && is.null(long_reads)) {
+    stop("At least one input should be specified.")
+  }
+  output_path <- .validate.outpath(output_path)
+  toolchest_client$unicycler(tool_args, read_one, read_two, long_reads, output_path)
+}
