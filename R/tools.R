@@ -104,5 +104,5 @@ unicycler <- function(tool_args = "", read_one = NULL, read_two = NULL, long_rea
     stop("At least one input should be specified.")
   }
   output_path <- .validate.outpath(output_path)
-  toolchest_client$unicycler(tool_args, read_one, read_two, long_reads, output_path)
+  toolchest_client$unicycler(output_path, read_one, read_two, long_reads, tool_args)
 }
