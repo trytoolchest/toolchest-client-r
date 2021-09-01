@@ -104,6 +104,8 @@ kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL,
 #' @note `read_one` is required. If paired-end reads are not used, the input
 #' file should be passed in as `read_one`.
 #'
+#' `database_name` should be specified as well.
+#'
 #' @export
 STAR <- function(tool_args = "", read_one = NULL, read_two = NULL,
                  output_path = NULL, database_name, database_version = NULL) {

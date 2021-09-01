@@ -36,4 +36,6 @@ user manually.
 \note{
 \code{read_one} is required. If paired-end reads are not used, the input
 file should be passed in as \code{read_one}.
+
+\code{database_name} should be specified as well.
 }
