@@ -115,8 +115,9 @@ readRenviron("~/.Renviron")
 
 ## Help / Documentation
 
-Documentation can be accessed within R, just like any other R function. For 
-help on how to use an individualtool, use either of the following:
+Documentation for each tool can be accessed within R, just like for any other R 
+function. 
+For help on how to use an individual tool, use either of the following:
 
 - `help(tool_name)`
 - `?toolchest::tool_name` (or simply `?tool_name`)
