@@ -26,7 +26,7 @@ manually.
 \examples{
 \dontrun{
 cutadapt(tool_args = "-a AATTCCGG")
-cutadapt(input_path = "C://Users/YourName/Documents/my_input_file.fastq", tool_args = "-a AATTCCGG")
+cutadapt(inputs = "C://Users/YourName/Documents/my_input_file.fastq", tool_args = "-a AATTCCGG")
 }
 
 }

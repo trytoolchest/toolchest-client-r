@@ -15,13 +15,14 @@
 bowtie2 <- function(tool_args = "", inputs = NULL, output_path = NULL, database_name, database_version) {
   inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
-  toolchest_client$bowtie2(
+  toolchest_args = list(
     inputs = inputs,
     output_path = output_path,
     database_name = database_name,
     database_version = database_version,
     tool_args = tool_args
   )
+  .do.toolchest.call(toolchest_client$bowtie2, toolchest_args)
 }
 
 #' Cutadapt Client
@@ -41,18 +42,19 @@ bowtie2 <- function(tool_args = "", inputs = NULL, output_path = NULL, database_
 #' @examples
 #' \dontrun{
 #' cutadapt(tool_args = "-a AATTCCGG")
-#' cutadapt(input_path = "C://Users/YourName/Documents/my_input_file.fastq", tool_args = "-a AATTCCGG")
+#' cutadapt(inputs = "C://Users/YourName/Documents/my_input_file.fastq", tool_args = "-a AATTCCGG")
 #' }
 #'
 #' @export
 cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
   inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
-  toolchest_client$cutadapt(
+  toolchest_args = list(
     inputs = inputs,
     output_path = output_path,
     tool_args = tool_args
   )
+  .do.toolchest.call(toolchest_client$cutadapt, toolchest_args)
 }
 
 #' Kraken 2 Client
@@ -70,11 +72,12 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL) {
   inputs <- .validate.inpath(inputs, choose_multiple = TRUE)
   output_path <- .validate.outpath(output_path)
-  toolchest_client$kraken2(
+  toolchest_args = list(
     tool_args = tool_args,
     inputs = inputs,
     output_path = output_path
   )
+  .do.toolchest.call(toolchest_client$kraken2, toolchest_args)
 }
 
 #' STAR Client
@@ -84,12 +87,12 @@ kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL) {
 #' If left unspecified, inputs and output_path can be selected by the user
 #' manually.
 #'
-#' @param tool_args (optional) Additional arguments to be passed to Kraken 2.
+#' @param tool_args (optional) Additional arguments to be passed to STAR.
 #' @param inputs Path or list of paths (client-side) to be passed in as input.
 #' @param output_path Path (client-side) where the output will be downloaded.
 #'
 #' @export
-STAR <- function() {
+STAR <- function(tool_args = "") {
 
 }
 
@@ -105,11 +108,12 @@ STAR <- function() {
 test <- function(tool_args = "", inputs = NULL, output_path = NULL) {
   inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
-  toolchest_client$test(
+  toolchest_args = list(
     inputs = inputs,
     output_path = output_path,
     tool_args = tool_args
   )
+  .do.toolchest.call(toolchest_client$test, toolchest_args)
 }
 
 #' Unicycler Client
@@ -141,11 +145,12 @@ unicycler <- function(tool_args = "", read_one = NULL, read_two = NULL,
     long_reads <- .choose.path(is_optional = TRUE, file_descriptor = "long reads (-l)")
   }
   output_path <- .validate.outpath(output_path)
-  toolchest_client$unicycler(
+  toolchest_args = list(
     output_path = output_path,
     read_one = read_one,
     read_two = read_two,
     long_reads = long_reads,
     tool_args = tool_args
   )
+  .do.toolchest.call(toolchest_client$unicycler, toolchest_args)
 }
