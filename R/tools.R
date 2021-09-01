@@ -15,7 +15,13 @@
 bowtie2 <- function(tool_args = "", inputs = NULL, output_path = NULL, database_name, database_version) {
   inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
-  toolchest_client$bowtie2(inputs, output_path, database_name, database_version, tool_args)
+  toolchest_client$bowtie2(
+    inputs = inputs,
+    output_path = output_path,
+    database_name = database_name,
+    database_version = database_version,
+    tool_args = tool_args
+  )
 }
 
 #' Cutadapt Client
@@ -42,7 +48,11 @@ bowtie2 <- function(tool_args = "", inputs = NULL, output_path = NULL, database_
 cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
   inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
-  toolchest_client$cutadapt(inputs, output_path, tool_args)
+  toolchest_client$cutadapt(
+    inputs = inputs,
+    output_path = output_path,
+    tool_args = tool_args
+  )
 }
 
 #' Kraken 2 Client
@@ -60,7 +70,27 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL) {
   inputs <- .validate.inpath(inputs, choose_multiple = TRUE)
   output_path <- .validate.outpath(output_path)
-  toolchest_client$kraken2(inputs, output_path, tool_args)
+  toolchest_client$kraken2(
+    tool_args = tool_args,
+    inputs = inputs,
+    output_path = output_path
+  )
+}
+
+#' STAR Client
+#'
+#' Starts a query for STAR using Toolchest.
+#'
+#' If left unspecified, inputs and output_path can be selected by the user
+#' manually.
+#'
+#' @param tool_args (optional) Additional arguments to be passed to Kraken 2.
+#' @param inputs Path or list of paths (client-side) to be passed in as input.
+#' @param output_path Path (client-side) where the output will be downloaded.
+#'
+#' @export
+STAR <- function() {
+
 }
 
 #' Test Pipeline Segment
@@ -75,7 +105,11 @@ kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL) {
 test <- function(tool_args = "", inputs = NULL, output_path = NULL) {
   inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
-  toolchest_client$test(inputs, output_path, tool_args)
+  toolchest_client$test(
+    inputs = inputs,
+    output_path = output_path,
+    tool_args = tool_args
+  )
 }
 
 #' Unicycler Client
@@ -107,5 +141,11 @@ unicycler <- function(tool_args = "", read_one = NULL, read_two = NULL,
     long_reads <- .choose.path(is_optional = TRUE, file_descriptor = "long reads (-l)")
   }
   output_path <- .validate.outpath(output_path)
-  toolchest_client$unicycler(output_path, read_one, read_two, long_reads, tool_args)
+  toolchest_client$unicycler(
+    output_path = output_path,
+    read_one = read_one,
+    read_two = read_two,
+    long_reads = long_reads,
+    tool_args = tool_args
+  )
 }
