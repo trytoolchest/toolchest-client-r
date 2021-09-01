@@ -102,3 +102,11 @@ can proceed to load `.Renviron` into your current R session as follows:
 ``` r
 readRenviron("~/.Renviron")
 ```
+
+## Help / Documentation
+
+Documentation can be accessed within R, just like any other R function.
+For help on how to use an individualtool, use either of the following:
+
+-   `help(tool_name)`
+-   `?toolchest::tool_name` (or simply `?tool_name`)

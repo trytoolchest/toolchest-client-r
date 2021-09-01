@@ -47,8 +47,8 @@
                          file_descriptor = "input") {
   if (is_optional) {
     optional_prompt <- sprintf("Would you like to choose %s?\n", file_descriptor)
-    choose_another <- utils::askYesNo(optional_prompt, default = FALSE)
-    if (is.na(choose_another) || !choose_another) {
+    optional_choice <- utils::askYesNo(optional_prompt, default = FALSE)
+    if (is.na(optional_choice) || !optional_choice) {
       return(NULL)
     }
   }
