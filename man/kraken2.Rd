@@ -17,8 +17,6 @@ kraken2(tool_args = "", inputs = NULL, output_path = NULL)
 Starts a query for Kraken 2 using Toolchest.
 }
 \details{
-(Currently, only single .fastq inputs are supported.)
-
 If left unspecified, inputs and output_path can be selected by the user
 manually.
 }

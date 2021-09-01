@@ -49,8 +49,6 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #'
 #' Starts a query for Kraken 2 using Toolchest.
 #'
-#' (Currently, only single .fastq inputs are supported.)
-#'
 #' If left unspecified, inputs and output_path can be selected by the user
 #' manually.
 #'
@@ -60,7 +58,7 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #'
 #' @export
 kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL) {
-  inputs <- .validate.inpath(inputs)
+  inputs <- .validate.inpath(inputs, choose_multiple = TRUE)
   output_path <- .validate.outpath(output_path)
   toolchest_client$kraken2(inputs, output_path, tool_args)
 }
@@ -84,9 +82,12 @@ test <- function(tool_args = "", inputs = NULL, output_path = NULL) {
 #'
 #' Runs Unicycler via Toolchest.
 #'
-#' @note If any of `read_one`, `read_two`, or `long_reads` are unspecified, Toolchest
-#' will assume that they are intended to be blank, unlike other tools. At least
-#' one input filepath is needed for Toolchest to run Unicycler.
+#' @note If some but not all of `read_one`, `read_two`, or `long_reads` are
+#' unspecified, Toolchest will assume that they are intended to be blank.
+#' If all are left blank, the user will be prompted to provide input file(s)
+#' and option(s).
+#'
+#' At least one input filepath is needed for Toolchest to run Unicycler.
 #'
 #' The output path is needed. An option will pop up to select a filepath
 #' if `output_path` is unspecified.
@@ -98,10 +99,12 @@ test <- function(tool_args = "", inputs = NULL, output_path = NULL) {
 #' @param output_path Path (client-side) where the output file will be downloaded.
 #'
 #' @export
-unicycler <- function(tool_args = "", read_one = NULL, read_two = NULL, long_reads = NULL, output_path = NULL) {
-
+unicycler <- function(tool_args = "", read_one = NULL, read_two = NULL,
+                      long_reads = NULL, output_path = NULL) {
   if (is.null(read_one) && is.null(read_two) && is.null(long_reads)) {
-    stop("At least one input should be specified.")
+    read_one <- .choose.path(is_optional = TRUE, file_descriptor = "read 1 (-1)")
+    read_two <- .choose.path(is_optional = TRUE, file_descriptor = "read 2 (-2)")
+    long_reads <- .choose.path(is_optional = TRUE, file_descriptor = "long reads (-l)")
   }
   output_path <- .validate.outpath(output_path)
   toolchest_client$unicycler(output_path, read_one, read_two, long_reads, tool_args)

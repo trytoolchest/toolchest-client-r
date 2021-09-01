@@ -27,9 +27,12 @@ unicycler(
 Runs Unicycler via Toolchest.
 }
 \note{
-If any of \code{read_one}, \code{read_two}, or \code{long_reads} are unspecified, Toolchest
-will assume that they are intended to be blank, unlike other tools. At least
-one input filepath is needed for Toolchest to run Unicycler.
+If some but not all of \code{read_one}, \code{read_two}, or \code{long_reads} are
+unspecified, Toolchest will assume that they are intended to be blank.
+If all are left blank, the user will be prompted to provide input file(s)
+and option(s).
+
+At least one input filepath is needed for Toolchest to run Unicycler.
 
 The output path is needed. An option will pop up to select a filepath
 if \code{output_path} is unspecified.
