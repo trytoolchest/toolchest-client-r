@@ -4,19 +4,36 @@
 \alias{STAR}
 \title{STAR Client}
 \usage{
-STAR(tool_args = "")
+STAR(
+  tool_args = "",
+  read_one = NULL,
+  read_two = NULL,
+  output_path = NULL,
+  database_name,
+  database_version = NULL
+)
 }
 \arguments{
 \item{tool_args}{(optional) Additional arguments to be passed to STAR.}
 
-\item{inputs}{Path or list of paths (client-side) to be passed in as input.}
+\item{read_one}{Path of input file to be passed in as Read 1 (-1).}
+
+\item{read_two}{(optional) Path of input file to be passed in as Read 2 (-2).}
 
 \item{output_path}{Path (client-side) where the output will be downloaded.}
+
+\item{database_name}{Name (string) of database to use for STAR mapping.}
+
+\item{database_version}{(optional) Version (string) of database to use for STAR mapping.}
 }
 \description{
-Starts a query for STAR using Toolchest.
+Starts a query for STAR (mapping) using Toolchest.
 }
 \details{
-If left unspecified, inputs and output_path can be selected by the user
-manually.
+If left unspecified, the input reads and output_path can be selected by the
+user manually.
+}
+\note{
+\code{read_one} is required. If paired-end reads are not used, the input
+file should be passed in as \code{read_one}.
 }
