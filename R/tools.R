@@ -61,6 +61,8 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #'
 #' Starts a query for Kraken 2 using Toolchest.
 #'
+#' Currently, only a single file is supported as input.
+#'
 #' If left unspecified, inputs and output_path can be selected by the user
 #' manually.
 #'
@@ -77,7 +79,7 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #' @export
 kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL,
                     database_name = NULL, database_version = NULL) {
-  inputs <- .validate.inpath(inputs, choose_multiple = TRUE)
+  inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
     tool_args = tool_args,

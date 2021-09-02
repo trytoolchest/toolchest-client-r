@@ -27,6 +27,8 @@ kraken2(
 Starts a query for Kraken 2 using Toolchest.
 }
 \details{
+Currently, only a single file is supported as input.
+
 If left unspecified, inputs and output_path can be selected by the user
 manually.
 }
