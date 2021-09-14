@@ -47,6 +47,8 @@ Toolchest currently supports the following tools:
 -   Bowtie 2 (`bowtie2`)
 -   Cutadapt (`cutadapt`)
 -   Kraken 2 (`kraken2`)
+-   STAR (`STAR`)
+-   Unicycler (`unicycler`)
 
 A `test` function is also supplied, which mimics how using a tool would
 work in Toolchest.
@@ -101,3 +103,12 @@ can proceed to load `.Renviron` into your current R session as follows:
 ``` r
 readRenviron("~/.Renviron")
 ```
+
+## Help / Documentation
+
+Documentation for each tool can be accessed within R, just like for any
+other R function. For help on how to use an individual tool, use either
+of the following:
+
+-   `help(tool_name)`
+-   `?toolchest::tool_name` (or simply `?tool_name`)

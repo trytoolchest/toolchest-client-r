@@ -2,18 +2,20 @@
 % Please edit documentation in R/file-select.R
 \name{.validate.inpath}
 \alias{.validate.inpath}
-\title{Helper function that allows user to select output path
-if \code{output_file} for a tool is not specified.}
+\title{Helper function that allows user to select input path(s) for a generic tool
+if \code{inputs} is not specified.}
 \usage{
-.validate.inpath(inputs)
+.validate.inpath(inputs, choose_multiple = FALSE)
 }
 \arguments{
 \item{inputs}{User-specified value for \code{inputs} variable.}
+
+\item{choose_multiple}{Whether the prompt should be repeated to select multiple files.}
 }
 \value{
 Input filepath(s).
 }
 \description{
-Helper function that allows user to select output path
-if \code{output_file} for a tool is not specified.
+Helper function that allows user to select input path(s) for a generic tool
+if \code{inputs} is not specified.
 }

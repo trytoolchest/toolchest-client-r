@@ -2,8 +2,8 @@
 % Please edit documentation in R/file-select.R
 \name{.validate.outpath}
 \alias{.validate.outpath}
-\title{Helper function that allows user to select input path(s)
-if \code{inputs} for a tool is not specified.}
+\title{Helper function that allows user to select output path
+if \code{output_file} for a tool is not specified.}
 \usage{
 .validate.outpath(output_path)
 }
@@ -14,6 +14,6 @@ if \code{inputs} for a tool is not specified.}
 Output filepath.
 }
 \description{
-Helper function that allows user to select input path(s)
-if \code{inputs} for a tool is not specified.
+Helper function that allows user to select output path
+if \code{output_file} for a tool is not specified.
 }

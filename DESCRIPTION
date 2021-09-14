@@ -1,6 +1,6 @@
 Package: toolchest
 Title: R Client for Toolchest
-Version: 0.5.0
+Version: 0.7.0
 Authors@R: c(
     person(given = "Bryce",
            family = "Cai",
@@ -13,8 +13,7 @@ Authors@R: c(
     )
 Description: Toolchest client for R. Provides queries for bioinformatics and
              data science tools using the Toolchest API.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: AGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -23,7 +22,8 @@ URL: https://github.com/gotoolchest/toolchest-client-r
 BugReports: https://github.com/gotoolchest/toolchest-client-r/issues
 Imports:
     httr,
-    reticulate
+    reticulate,
+    utils
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
