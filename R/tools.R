@@ -86,7 +86,7 @@ kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL,
     inputs = inputs,
     output_path = output_path,
     database_name = database_name,
-    database_version = database_version,
+    database_version = database_version
   )
   .do.toolchest.call(toolchest_client$kraken2, toolchest_args)
 }
