@@ -78,13 +78,15 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #'
 #' @export
 kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL,
-                    database_name = NULL, database_version = NULL) {
+                    database_name = "standard", database_version = "1") {
   inputs <- .validate.inpath(inputs)
   output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
     tool_args = tool_args,
     inputs = inputs,
-    output_path = output_path
+    output_path = output_path,
+    database_name = database_name,
+    database_version = database_version,
   )
   .do.toolchest.call(toolchest_client$kraken2, toolchest_args)
 }
