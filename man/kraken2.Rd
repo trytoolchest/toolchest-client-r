@@ -8,8 +8,8 @@ kraken2(
   tool_args = "",
   inputs = NULL,
   output_path = NULL,
-  database_name = NULL,
-  database_version = NULL
+  database_name = "standard",
+  database_version = "1"
 )
 }
 \arguments{
