@@ -1,5 +1,5 @@
-#' Helper function that sanitizes args removes blank args (to be handled by
-#' the Python client) and executes the corresponding Python client call.
+#' Helper function that sanitizes args by removing blank args (to be handled by
+#' the Python client) and executing the corresponding Python client call.
 #'
 #' @param tool Tool to be used (python function, from reticulate-based python module).
 #' @param args List containing keyword arguments to be passed in to tool.
