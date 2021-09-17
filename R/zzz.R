@@ -9,7 +9,11 @@
 
   packageStartupMessage("Configuring reticulate...")
   reticulate::virtualenv_create("r-reticulate")
-  reticulate::virtualenv_install("r-reticulate", "toolchest_client")
+  reticulate::virtualenv_install(
+    envname = "r-reticulate",
+    packages = "toolchest_client",
+    ignore_installed = TRUE
+  )
 
   reticulate::configure_environment("toolchest_client")
   toolchest_client <<- reticulate::import("toolchest_client", delay_load = TRUE)
