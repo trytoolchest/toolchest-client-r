@@ -61,6 +61,7 @@ You can install the development version from
 ``` r
 # install.packages("devtools") # uncomment to install devtools (prereq package)
 devtools::install_github("trytoolchest/toolchest-client-r")
+library(toolchest)
 ```
 
 ## Configuration

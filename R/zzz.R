@@ -7,7 +7,14 @@
 .onLoad <- function(libname, pkgname) {
   packageStartupMessage("Installing Toolchest client... ")
 
-  reticulate::py_install("toolchest_client", method = "auto", pip = TRUE)
+  packageStartupMessage("Configuring reticulate...")
+  reticulate::virtualenv_create("r-reticulate")
+  reticulate::virtualenv_install(
+    envname = "r-reticulate",
+    packages = "toolchest_client",
+    ignore_installed = TRUE
+  )
+
   reticulate::configure_environment("toolchest_client")
   toolchest_client <<- reticulate::import("toolchest_client", delay_load = TRUE)
 

@@ -36,7 +36,7 @@ bowtie2 <- function(tool_args = "", inputs = NULL, output_path = NULL, database_
 #' manually.
 #'
 #' @param tool_args Additional arguments to be passed to Cutadapt.
-#' @param inputs Path or list of paths (client-side) to be passed in as input.
+#' @param inputs Path (client-side) to be passed in as input.
 #' @param output_path Path (client-side) where the output file will be downloaded.
 #'
 #' @examples
@@ -67,7 +67,7 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #' manually.
 #'
 #' @param tool_args (optional) Additional arguments to be passed to Kraken 2.
-#' @param inputs Path or list of paths (client-side) to be passed in as input.
+#' @param inputs Path (client-side) to be passed in as input.
 #' @param output_path Path (client-side) where the output will be downloaded.
 #' @param database_name (optional) Name (string) of database to use for Kraken 2 alignment.
 #' @param database_version (optional) Version (string) of database to use for Kraken 2 alignment.
