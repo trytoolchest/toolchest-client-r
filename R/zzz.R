@@ -12,6 +12,7 @@
   reticulate::conda_install(
     envname = "r-reticulate",
     packages = "toolchest_client",
+    pip = TRUE,
     pip_ignore_installed = TRUE
   )
 
