@@ -13,15 +13,13 @@
 
   packageStartupMessage("Configuring reticulate...")
   if (reticulate::virtualenv_exists("r-reticulate")) {
-    message("checking version")
     version_check <- reticulate::py_run_string("from distutils.version import LooseVersion
 import setuptools
 
 setuptools_version = setuptools.__version__
 reset_setuptools = (LooseVersion(setuptools_version) >= LooseVersion('58.0.2'))
 ")
-    if (version_check$reset_setuptools || T) {
-      message("reinstalling setuptools")
+    if (version_check$reset_setuptools) {
       packageStartupMessage("Incompatible version of setuptools detected. Reinstalling setuptools...")
       reticulate::virtualenv_remove("r-reticulate", "setuptools")
       reticulate::virtualenv_install("r-reticulate", "setuptools==58.0.0")
