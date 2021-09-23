@@ -8,12 +8,16 @@
   packageStartupMessage("Installing Toolchest client... ")
 
   packageStartupMessage("Configuring reticulate...")
-  reticulate::virtualenv_create("r-reticulate")
+  if (reticulate::virtualenv_exists("r-reticulate")) {
+    reticulate::virtualenv_remove("r-reticulate", "setuptools")
+    reticulate::virtualenv_install("r-reticulate", "setuptools==58.0.0")
+  } else {
+    reticulate::virtualenv_create("r-reticulate", setuptools_version = "58.0.0")
+  }
   reticulate::virtualenv_install(
     envname = "r-reticulate",
     packages = "toolchest_client",
     ignore_installed = TRUE,
-    setuptools_version = "58.0.0"
   )
 
   reticulate::configure_environment("toolchest_client")
