@@ -9,8 +9,16 @@
 
   packageStartupMessage("Configuring reticulate...")
   if (reticulate::virtualenv_exists("r-reticulate")) {
-    reticulate::virtualenv_remove("r-reticulate", "setuptools")
-    reticulate::virtualenv_install("r-reticulate", "setuptools==58.0.0")
+    version_check <- reticulate::py_run_string("from distutils.version import LooseVersion
+import setuptools
+
+setuptools_version = setuptools.__version__
+reset_setuptools = (LooseVersion(setuptools_version) >= LooseVersion('58.0.2'))
+")
+    if (version_check$reset_setuptools) {
+      reticulate::virtualenv_remove("r-reticulate", "setuptools")
+      reticulate::virtualenv_install("r-reticulate", "setuptools==58.0.0")
+    }
   } else {
     reticulate::virtualenv_create("r-reticulate", setuptools_version = "58.0.0")
   }
