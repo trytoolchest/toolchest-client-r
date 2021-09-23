@@ -12,7 +12,8 @@
   reticulate::virtualenv_install(
     envname = "r-reticulate",
     packages = "toolchest_client",
-    ignore_installed = TRUE
+    ignore_installed = TRUE,
+    setuptools_version = "58.0.0"
   )
 
   reticulate::configure_environment("toolchest_client")
