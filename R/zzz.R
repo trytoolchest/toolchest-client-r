@@ -7,9 +7,9 @@
 .onLoad <- function(libname, pkgname) {
   packageStartupMessage("Installing Toolchest client... ")
 
-  packageStartupMessage("Configuring python...")
-  py_version <- "3.8.7"
-  reticulate::install_python(version = py_version)
+  # packageStartupMessage("Configuring python...")
+  # py_version <- "3.8.7"
+  # reticulate::install_python(version = py_version)
 
   packageStartupMessage("Configuring reticulate...")
   if (reticulate::virtualenv_exists("r-reticulate")) {
