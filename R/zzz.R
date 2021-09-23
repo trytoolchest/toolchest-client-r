@@ -28,7 +28,7 @@ reset_setuptools = (LooseVersion(setuptools_version) >= LooseVersion('58.0.2'))
     ignore_installed = TRUE,
   )
 
-  reticulate::configure_environment("toolchest_client")
+  # reticulate::configure_environment("toolchest_client")
   toolchest_client <<- reticulate::import("toolchest_client", delay_load = TRUE)
 
   packageStartupMessage("The Toolchest client has been installed!")
