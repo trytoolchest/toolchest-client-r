@@ -8,12 +8,11 @@
   packageStartupMessage("Installing Toolchest client... ")
 
   packageStartupMessage("Configuring reticulate...")
-  reticulate::conda_create("r-reticulate")
-  reticulate::conda_install(
+  reticulate::virtualenv_create("r-reticulate")
+  reticulate::virtualenv_install(
     envname = "r-reticulate",
     packages = "toolchest_client",
-    pip = TRUE,
-    pip_ignore_installed = TRUE
+    ignore_installed = TRUE
   )
 
   reticulate::configure_environment("toolchest_client")
