@@ -25,7 +25,7 @@ reset_setuptools = (LooseVersion(setuptools_version) >= LooseVersion('58.0.2'))
   reticulate::virtualenv_install(
     envname = "r-reticulate",
     packages = "toolchest_client",
-    ignore_installed = TRUE,
+    ignore_installed = TRUE
   )
 
   # reticulate::configure_environment("toolchest_client")
