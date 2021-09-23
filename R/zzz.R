@@ -19,7 +19,7 @@ import setuptools
 setuptools_version = setuptools.__version__
 reset_setuptools = (LooseVersion(setuptools_version) >= LooseVersion('58.0.2'))
 ")
-    if (version_check$reset_setuptools) {
+    if (version_check$reset_setuptools || T) {
       packageStartupMessage("Incompatible version of setuptools detected. Reinstalling setuptools...")
       reticulate::virtualenv_remove("r-reticulate", "setuptools")
       reticulate::virtualenv_install("r-reticulate", "setuptools==58.0.0")
