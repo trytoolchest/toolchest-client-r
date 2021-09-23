@@ -18,6 +18,7 @@ reset_setuptools = (LooseVersion(setuptools_version) >= LooseVersion('58.0.2'))
     if (version_check$reset_setuptools) {
       packageStartupMessage("Incompatible version of setuptools detected. Reinstalling setuptools...")
       reticulate::virtualenv_remove("r-reticulate", "setuptools")
+      cat("Reinstalling")
       reticulate::virtualenv_install("r-reticulate", "setuptools==58.0.0")
     }
   } else {
