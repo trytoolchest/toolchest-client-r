@@ -72,6 +72,23 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("trytoolchest/toolchest-client-r")
 library(toolchest)
 ```
+
+### Python requirements
+The R client requires an accessible version of **Python 3.6 or greater** with 
+`libpython` libraries. 
+
+Most manually installed versions of Python 3.6 will have the necessary libraries
+installed with Python itself.
+
+For MacOS: The built-in `python` version may not have the necessary libraries.
+Installing Python from [Homebrew](https://brew.sh/) should provide a version
+that does include them:
+
+```shell
+$ brew install python
+```
+
+Make sure that the newly installed Python is on your `$PATH`.
     
 ## Configuration
 
