@@ -66,10 +66,10 @@ library(toolchest)
 
 ### Python requirements
 
-The R client requires an accessible version of **Python 3.6 or greater**
-with `libpython` libraries.
+The R client requires a version of **Python 3.6 or greater** with
+`libpython` libraries, accessible via the `$PATH`.
 
-Most manually installed versions of Python 3.6 will have the necessary
+Most manually installed versions of Python will have the necessary
 libraries installed with Python itself.
 
 For MacOS: The built-in `python` version may not have the necessary
