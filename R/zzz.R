@@ -36,7 +36,7 @@
     ignore_installed = TRUE
   )
   # reticulate::configure_environment("toolchest_client")
-  toolchest_client <<- reticulate::import("toolchest_client", delay_load = TRUE)
+  toolchest_client <<- reticulate::import("toolchest_client") #, delay_load = TRUE)
 
   packageStartupMessage("The Toolchest client has been installed!")
 
