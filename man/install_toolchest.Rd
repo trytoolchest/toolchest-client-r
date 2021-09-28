@@ -6,9 +6,6 @@
 \usage{
 install_toolchest()
 }
-\value{
-\code{toolchest_client}, an object representing the Toolchest Python client.
-}
 \description{
 Installs and loads the \code{toolchest_client} Python package.
 }

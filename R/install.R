@@ -2,7 +2,6 @@
 #'
 #' @note The Python package interface is stored in the global variable `toolchest_client`.
 #'
-#' @return `toolchest_client`, an object representing the Toolchest Python client.
 #' @export
 install_toolchest <- function() {
   packageStartupMessage("Installing Toolchest client... ")
@@ -55,7 +54,9 @@ install_toolchest <- function() {
   }
   packageStartupMessage(config_message)
 
-  return(toolchest_client)
+  # Returns the client object, in case the user would like to invoke it
+  # directly with `toolchest_client$function_name()`.
+  invisible(toolchest_client)
 }
 
 python_is_compatible <- function(python_path) {
