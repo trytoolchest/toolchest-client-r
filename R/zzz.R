@@ -4,6 +4,7 @@
     "To install the Toolchest client, run:",
     "",
     "  toolchest::install_toolchest()",
+    "",
     sep = "\n"
   )
   packageStartupMessage(startup_message)
