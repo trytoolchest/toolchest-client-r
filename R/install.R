@@ -179,7 +179,12 @@ configure_virtualenv <- function(env_name, python_path) {
     Sys.setenv(RETICULATE_PYTHON = python_path)
 
     packageStartupMessage("Creating Python virtual environment...")
-    reticulate::virtualenv_create(env_name, python = python_path, setuptools_version = SETUPTOOLS_VERSION)
+    reticulate::virtualenv_create(
+      envname = env_name,
+      python = python_path,
+      module = "virtualenv",
+      setuptools_version = SETUPTOOLS_VERSION
+    )
   }
 
   # Enforce RETICULATE_PYTHON to be the version in the r-reticulate env,
