@@ -99,7 +99,7 @@ python_versions_in_path <- function() {
 
 find_compatible_python <- function() {
   # Version to be installed on Windows if no compatible python found.
-  INSTALLED_PYTHON_VERSION <- "3.8"
+  PYTHON_VERSION_TO_BE_INSTALLED <- "3.8"
 
   python_path <- NULL
 
@@ -155,7 +155,10 @@ find_compatible_python <- function() {
       conda_try <- try(reticulate::conda_list(), silent = TRUE)
       if (class(conda_try) == "try-error") {
         packageStartupMessage("No install of Anaconda detected. Installing Miniconda.")
-        reticulate::conda_install("r-miniconda", python_version = "3.8")
+        reticulate::conda_install(
+          "r-miniconda",
+          python_version = PYTHON_VERSION_TO_BE_INSTALLED
+        )
         return(reticulate::conda_python("r-miniconda"))
       }
     }
@@ -168,6 +171,10 @@ find_compatible_python <- function() {
 
 configure_virtualenv <- function(env_name, python_path) {
   SETUPTOOLS_VERSION <- "58.0.0"
+
+  # Enforce RETICULATE_PYTHON to be the version used by the r-reticulate env.
+  # This prevents reticulate's miniconda from overriding it, if present.
+  Sys.setenv(RETICULATE_PYTHON = python_path)
 
   # Create environment if it doesn't exist.
   if (!reticulate::virtualenv_exists(env_name)) {
