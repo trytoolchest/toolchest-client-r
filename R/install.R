@@ -172,15 +172,21 @@ find_compatible_python <- function() {
 configure_virtualenv <- function(env_name, python_path) {
   SETUPTOOLS_VERSION <- "58.0.0"
 
-  # Enforce RETICULATE_PYTHON to be the version used by the r-reticulate env.
-  # This prevents reticulate's miniconda from overriding it, if present.
-  Sys.setenv(RETICULATE_PYTHON = python_path)
-
   # Create environment if it doesn't exist.
   if (!reticulate::virtualenv_exists(env_name)) {
+    # Enforce RETICULATE_PYTHON to be the version passed into the function.
+    # This prevents reticulate's miniconda from overriding it, if present.
+    Sys.setenv(RETICULATE_PYTHON = python_path)
+
     packageStartupMessage("Creating Python virtual environment...")
     reticulate::virtualenv_create(env_name, python = python_path, setuptools_version = SETUPTOOLS_VERSION)
   }
+
+  # Enforce RETICULATE_PYTHON to be the version in the r-reticulate env,
+  # in order to make any changes to setuptools affect the env python
+  # instead of the version on python_path, if it is different.
+  env_python <- reticulate::virtualenv_python("r-reticulate")
+  Sys.setenv(RETICULATE_PYTHON = env_python)
 
   # Check the version of setuptools. Reinstall if needed.
   version_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
