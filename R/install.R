@@ -178,17 +178,6 @@ configure_virtualenv <- function(env_name, python_path) {
   # Check the version of setuptools. Reinstall if needed.
   version_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
 
-  #   version_check <- reticulate::py_run_string("reset_setuptools = False
-  # try:
-  #   from distutils.version import LooseVersion
-  #   import setuptools
-  #
-  #   setuptools_version = setuptools.__version__
-  #   reset_setuptools = (LooseVersion(setuptools_version) >= LooseVersion('58.0.2'))
-  # except ModuleNotFoundError:
-  #   pass
-  # ")
-
   if (version_check$reset_setuptools) {
     packageStartupMessage("Incompatible version of setuptools detected. Reinstalling setuptools...")
     reticulate::virtualenv_remove(env_name, "setuptools", confirm = FALSE)
