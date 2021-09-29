@@ -6,6 +6,10 @@
 install_toolchest <- function() {
   packageStartupMessage("Installing Toolchest client... ")
 
+  # Disable the prompt to install with conda, which is not compatible
+  # on Mac/Linux due to the pysam install.
+  Sys.setenv(RETICULATE_MINICONDA_ENABLED = FALSE)
+
   # check python configuration
   packageStartupMessage("Checking Python configuration...")
   python_path <- NULL
