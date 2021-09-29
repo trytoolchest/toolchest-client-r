@@ -33,6 +33,7 @@ install_toolchest <- function() {
   packageStartupMessage("Configuring reticulate...")
   configure_virtualenv("r-reticulate", python_path)
 
+  packageStartupMessage("Installing Toolchest into environment...")
   reticulate::virtualenv_install(
     envname = "r-reticulate",
     packages = "toolchest_client",
@@ -191,6 +192,9 @@ configure_virtualenv <- function(env_name, python_path) {
   # instead of the version on python_path, if it is different.
   env_python <- reticulate::virtualenv_python("r-reticulate")
   Sys.setenv(RETICULATE_PYTHON = env_python)
+
+  # Reload reticulate in case the python version changes.
+  library(reticulate)
 
   # Check the version of setuptools. Reinstall if needed.
   version_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
