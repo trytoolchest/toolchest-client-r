@@ -14,9 +14,9 @@ install_toolchest <- function() {
   packageStartupMessage("Checking Python configuration...")
   python_path <- NULL
   if (reticulate::virtualenv_exists("r-reticulate")) {
-    reticulate_python_path <- reticulate::virtualenv_python("r-reticulate")
+    python_path <- reticulate::virtualenv_python("r-reticulate")
     # Rebuild r-reticulate environment if built on an incompatible Python version.
-    if (!python_is_compatible(reticulate_python_path)) {
+    if (!python_is_compatible(python_path)) {
       packageStartupMessage("Env r-reticulate has an incompatible Python version. Searching for compatible Python...")
       python_path <- find_compatible_python() # throws error if not found
       packageStartupMessage("Compatible Python found. Env r-reticulate must be rebuilt.")
