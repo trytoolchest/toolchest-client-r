@@ -194,7 +194,7 @@ configure_virtualenv <- function(env_name, python_path) {
   Sys.setenv(RETICULATE_PYTHON = env_python)
 
   # Reload reticulate in case the python version changes.
-  library(reticulate)
+  # TODO: add a proper reload here, or at least an error msg if install fails
 
   # Check the version of setuptools. Reinstall if needed.
   version_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
