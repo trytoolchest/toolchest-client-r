@@ -193,8 +193,27 @@ configure_virtualenv <- function(env_name, python_path) {
   env_python <- reticulate::virtualenv_python("r-reticulate")
   Sys.setenv(RETICULATE_PYTHON = env_python)
 
-  # Reload reticulate in case the python version changes.
-  # TODO: add a proper reload here, or at least an error msg if install fails
+  # Prompt the user to restart R in case the python version changes.
+  # Note: this only seems to work consistently on Mac/Linux, due to
+  # reticulate choosing conda if present over RETICULATE_PYTHON on Windows.
+  loaded_python <- reticulate::py_config()$python
+  if (env_python != loaded_python) {
+    sysname <- Sys.info()[["sysname"]]
+    if (sysname == "Darwin" || sysname == "Linux") {
+      restart_msg <- paste(
+        "The required Python version differs from the pre-loaded Python.",
+        "Restart R and re-run the installation with:",
+        "",
+        "  toolchest::install_toolchest()",
+        "",
+        "Let Toolchest know if this problem persists.",
+        sep = "\n"
+      )
+      stop(restart_msg, call. = FALSE)
+    }
+  }
+  # TODO: add a proper reload check here for Windows, since this is bugged
+  # but less failure-prone: https://github.com/rstudio/reticulate/issues/568
 
   # Check the version of setuptools. Reinstall if needed.
   version_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
