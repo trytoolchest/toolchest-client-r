@@ -195,6 +195,8 @@ configure_virtualenv <- function(env_name, python_path) {
     # This prevents reticulate's miniconda from overriding it, if present.
     Sys.setenv(RETICULATE_PYTHON = python_path)
 
+    # Check if the virtualenv package is installed. If not, install it.
+
     packageStartupMessage("Creating Python virtual environment...")
     reticulate::virtualenv_create(
       envname = env_name,
