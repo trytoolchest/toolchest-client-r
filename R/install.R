@@ -196,6 +196,7 @@ configure_virtualenv <- function(env_name, python_path) {
     Sys.setenv(RETICULATE_PYTHON = python_path)
 
     # Check if the virtualenv package is installed. If not, install it.
+    system(sprintf("%s -m pip install virtualenv", python_path))
 
     packageStartupMessage("Creating Python virtual environment...")
     reticulate::virtualenv_create(
