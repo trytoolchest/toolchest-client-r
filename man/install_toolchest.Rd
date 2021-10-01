@@ -2,7 +2,7 @@
 % Please edit documentation in R/install.R
 \name{install_toolchest}
 \alias{install_toolchest}
-\title{Installs and loads the \code{toolchest_client} Python package.}
+\title{Toolchest Installation}
 \usage{
 install_toolchest()
 }

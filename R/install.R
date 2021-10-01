@@ -1,3 +1,5 @@
+#' Toolchest Installation
+#'
 #' Installs and loads the `toolchest_client` Python package.
 #'
 #' @note The Python package interface is stored in the global variable `toolchest_client`.
@@ -132,12 +134,24 @@ find_compatible_python <- function() {
   # If no compatible Python found, try some backup options and/or display a
   # custom error message depending on OS.
   if (is.null(python_path)) {
-    packageStartupMessage("No compatible version of Python (>=3.6) with development libraries found.")
+    error_msg <- paste(
+      "No compatible version of Python (>=3.6) with development libraries ",
+      "(libpython) found, which are needed for parallelization.",
+      "",
+      "Ensure that a compatible version of Python is on your PATH env variable.",
+      "",
+      "If problems persist, set RETICULATE_PYTHON manually and re-install:",
+      "",
+      "  Sys.setenv(RETICULATE_PYTHON = \"/path/to/your/python\")",
+      "  toolchest::install_toolchest()",
+      sep = "\n"
+    )
+    packageStartupMessage(error_msg)
 
     # if on MacOS, suggest installing python3 via homebrew
     if (sysname == "Darwin") {
       suggestion_message <- paste(
-        "MacOS detected. Try installing Python3 via Homebrew (https://brew.sh/):",
+        "MacOS detected. Try installing Python3 (>=3.6) via Homebrew (https://brew.sh/):",
         "",
         "  brew install python",
         "",
@@ -145,8 +159,11 @@ find_compatible_python <- function() {
         "",
         "  brew reinstall python",
         "",
-        "After installation, make sure that Homebrew is on your $PATH.",
-        "Note that Python 3.6 or greater is required for Toolchest.",
+        "After installation, make sure that Homebrew is on your PATH env var.",
+        "If problems persist, set RETICULATE_PYTHON manually and re-install:",
+        "",
+        "  Sys.setenv(RETICULATE_PYTHON = \"/path/to/your/python\")",
+        "  toolchest::install_toolchest()",
         sep = "\n"
       )
       packageStartupMessage(suggestion_message)
@@ -163,7 +180,7 @@ find_compatible_python <- function() {
       }
     }
 
-    stop("No compatible version of Python (>=3.6) with development libraries found.", call. = FALSE)
+    stop(error_msg, call. = FALSE)
   }
 
   return(python_path)
@@ -213,7 +230,8 @@ configure_virtualenv <- function(env_name, python_path) {
     }
   }
   # TODO: add a proper reload check here for Windows, since this is bugged
-  # but less failure-prone: https://github.com/rstudio/reticulate/issues/568
+  # but doesn't seem to break reticulate:
+  # https://github.com/rstudio/reticulate/issues/568
 
   # Check the version of setuptools. Reinstall if needed.
   version_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
