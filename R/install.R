@@ -71,7 +71,7 @@ python_is_compatible <- function(python_path) {
   Sys.setenv(RETICULATE_PYTHON = python_path)
   path_is_python <- try(python_info <- reticulate::py_discover_config(), silent = TRUE)
   Sys.unsetenv("RETICULATE_PYTHON")
-  if (!path_is_python) {
+  if (class(path_is_python) == "try-error") {
     return(FALSE)
   }
 
