@@ -195,8 +195,8 @@ configure_virtualenv <- function(env_name, python_path) {
     # This prevents reticulate's miniconda from overriding it, if present.
     Sys.setenv(RETICULATE_PYTHON = python_path)
 
-    # Check if the virtualenv package is installed. If not, install it.
-    system(sprintf("%s -m pip install virtualenv", python_path))
+    # Check if the virtualenv module is installed. If not, install it.
+    install_virtualenv_module(python_path)
 
     packageStartupMessage("Creating Python virtual environment...")
     reticulate::virtualenv_create(
@@ -237,11 +237,25 @@ configure_virtualenv <- function(env_name, python_path) {
   # https://github.com/rstudio/reticulate/issues/568
 
   # Check the version of setuptools. Reinstall if needed.
-  version_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
+  setuptools_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
 
-  if (version_check$reset_setuptools) {
+  if (setuptools_check$reset_setuptools) {
     packageStartupMessage("Incompatible version of setuptools detected. Reinstalling setuptools...")
     reticulate::virtualenv_remove(env_name, "setuptools", confirm = FALSE)
     reticulate::virtualenv_install(env_name, sprintf("setuptools==%s", SETUPTOOLS_VERSION))
+  }
+}
+
+install_virtualenv_module <- function(python) {
+  # NOTE: pip comes bundled with all Python versions 3.4 and above, so
+  # any Python version compatible with Toolchest (>= 3.6) will have pip.
+
+  # Check if the python version has the virtualenv module.
+  virtualenv_check <- system.file("python", "check_virtualenv.py", package = "toolchest")
+  has_virtualenv <- (system2(python, virtualenv_check, stdout = FALSE, stderr = FALSE) == 0L)
+
+  # If virtualenv not present, install it with pip.
+  if (!has_virtualenv) {
+    system2(python, "-m pip install --upgrade --user virtualenv")
   }
 }
