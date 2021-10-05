@@ -69,11 +69,14 @@ python_is_compatible <- function(python_path) {
   MIN_PYTHON_VERSION <- "3.6"
 
   Sys.setenv(RETICULATE_PYTHON = python_path)
-  python_info <- reticulate::py_discover_config()
+  path_is_python <- try(python_info <- reticulate::py_discover_config(), silent = TRUE)
   Sys.unsetenv("RETICULATE_PYTHON")
+  if (!path_is_python) {
+    return(FALSE)
+  }
 
   if (!is.null(python_info$libpython) &&
-      utils::compareVersion(python_info$version, MIN_PYTHON_VERSION) >= 0) {
+    utils::compareVersion(python_info$version, MIN_PYTHON_VERSION) >= 0) {
     return(TRUE)
   }
   return(FALSE)
