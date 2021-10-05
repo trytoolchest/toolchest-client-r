@@ -259,6 +259,6 @@ install_virtualenv_module <- function(python) {
 
   # If virtualenv not present, install it with pip.
   if (!has_virtualenv) {
-    system2(python, "-m pip install --upgrade --user virtualenv")
+    system2(python, "-m pip install --upgrade --user --no-warn-script-location virtualenv")
   }
 }
