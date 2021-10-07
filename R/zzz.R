@@ -1,11 +1,5 @@
 .onLoad <- function(libname, pkgname) {
-  startup_message <- paste(
-    "Toolchest client loaded.",
-    "To install the Toolchest client, run:",
-    "",
-    "  toolchest::install_toolchest()",
-    "",
-    sep = "\n"
-  )
+  startup_message <- paste("Toolchest client loaded.")
   packageStartupMessage(startup_message)
+  toolchest::install_toolchest()
 }
