@@ -140,37 +140,11 @@ find_compatible_python <- function() {
     error_msg <- paste(
       "No compatible version of Python (>=3.6) with development libraries ",
       "(libpython) found, which are needed for parallelization.",
-      "",
-      "Ensure that a compatible version of Python is on your PATH env variable.",
-      "",
-      "If problems persist, set RETICULATE_PYTHON manually and re-install:",
-      "",
-      "  Sys.setenv(RETICULATE_PYTHON = \"/path/to/your/python\")",
-      "  toolchest::install_toolchest()",
       sep = "\n"
     )
     packageStartupMessage(error_msg)
 
-    # if on MacOS, suggest installing python3 via homebrew
-    if (sysname == "Darwin") {
-      suggestion_message <- paste(
-        "MacOS detected. Try installing Python3 (>=3.6) via Homebrew (https://brew.sh/):",
-        "",
-        "  brew install python",
-        "",
-        "If Homebrew + Python are installed and problems persist, try reinstalling:",
-        "",
-        "  brew reinstall python",
-        "",
-        "After installation, make sure that Homebrew is on your PATH env var.",
-        "If problems persist, set RETICULATE_PYTHON manually and re-install:",
-        "",
-        "  Sys.setenv(RETICULATE_PYTHON = \"/path/to/your/python\")",
-        "  toolchest::install_toolchest()",
-        sep = "\n"
-      )
-      packageStartupMessage(suggestion_message)
-    } else if (sysname == "Windows") {
+    if (sysname == "Windows") {
       # If on Windows, attempt to install Miniconda if not installed.
       conda_try <- try(reticulate::conda_list(), silent = TRUE)
       if (class(conda_try) == "try-error") {
@@ -181,8 +155,18 @@ find_compatible_python <- function() {
         )
         return(reticulate::conda_python("r-miniconda"))
       }
+    } else {
+      # If on a different OS, redirect user to the INSTALL documentation page.
+      suggestion_msg <- paste(
+        "If problems persist, see the install page for more details and potential fixes: ",
+        "",
+        "  https://github.com/trytoolchest/toolchest-client-r/blob/main/INSTALL.md",
+        "",
+        "or contact Toolchest directly.",
+        sep = "\n"
+      )
+      packageStartupMessage(suggestion_msg)
     }
-
     stop(error_msg, call. = FALSE)
   }
 
@@ -225,9 +209,9 @@ configure_virtualenv <- function(env_name, python_path) {
     if (sysname == "Darwin" || sysname == "Linux") {
       restart_msg <- paste(
         "The required Python version differs from the pre-loaded Python.",
-        "Restart R and re-run the installation with:",
+        "Restart R and re-load Toolchest:",
         "",
-        "  toolchest::install_toolchest()",
+        "  library(toolchest)",
         "",
         "Let Toolchest know if this problem persists.",
         sep = "\n"
