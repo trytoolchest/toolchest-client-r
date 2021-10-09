@@ -2,8 +2,8 @@
 % Please edit documentation in R/util.R
 \name{.do.toolchest.call}
 \alias{.do.toolchest.call}
-\title{Helper function that sanitizes args removes blank args (to be handled by
-the Python client) and executes the corresponding Python client call.}
+\title{Helper function that sanitizes args by removing blank args (to be handled by
+the Python client) and executing the corresponding Python client call.}
 \usage{
 .do.toolchest.call(tool, args)
 }
@@ -13,6 +13,6 @@ the Python client) and executes the corresponding Python client call.}
 \item{args}{List containing keyword arguments to be passed in to tool.}
 }
 \description{
-Helper function that sanitizes args removes blank args (to be handled by
-the Python client) and executes the corresponding Python client call.
+Helper function that sanitizes args by removing blank args (to be handled by
+the Python client) and executing the corresponding Python client call.
 }

@@ -9,7 +9,7 @@ cutadapt(tool_args, inputs = NULL, output_path = NULL)
 \arguments{
 \item{tool_args}{Additional arguments to be passed to Cutadapt.}
 
-\item{inputs}{Path or list of paths (client-side) to be passed in as input.}
+\item{inputs}{Path (client-side) to be passed in as input.}
 
 \item{output_path}{Path (client-side) where the output file will be downloaded.}
 }

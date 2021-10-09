@@ -15,7 +15,7 @@ kraken2(
 \arguments{
 \item{tool_args}{(optional) Additional arguments to be passed to Kraken 2.}
 
-\item{inputs}{Path or list of paths (client-side) to be passed in as input.}
+\item{inputs}{Path (client-side) to be passed in as input.}
 
 \item{output_path}{Path (client-side) where the output will be downloaded.}
 

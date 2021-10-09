@@ -17,8 +17,17 @@ here](https://github.com/trytoolchest/toolchest-client-python).
 
 ## Usage
 
-Using Toolchest is as simple as installing the client (listed as the
-`toolchest` package) and running the following:
+Using Toolchest is as simple as:
+
+1.  installing the client (listed as the `toolchest` package)
+
+2.  configuring Toolchest with your given Toolchest key:
+
+``` r
+toolchest::set_key("YOUR_TOOLCHEST_KEY")
+```
+
+3.  running the following:
 
 ``` r
 toolchest::tool_name(tool_args)
@@ -53,15 +62,27 @@ Toolchest currently supports the following tools:
 A `test` function is also supplied, which mimics how using a tool would
 work in Toolchest.
 
-## Installation
+## [Installation](INSTALL.md)
 
 You can install the development version from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/trytoolchest/toolchest-client-r) with:
 
 ``` r
 # install.packages("devtools") # uncomment to install devtools (prereq package)
 devtools::install_github("trytoolchest/toolchest-client-r")
+library(toolchest)
 ```
+
+### Python requirements
+
+The R client requires a version of **Python 3.6 or greater** with
+development libraries (`libpython`).
+
+### Troubleshooting
+
+For more details, see [the INSTALL page](INSTALL.md). If you’re having
+trouble with installation, consult the page and/or contact Toolchest
+directly.
 
 ## Configuration
 
