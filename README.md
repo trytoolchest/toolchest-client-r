@@ -64,10 +64,6 @@ work in Toolchest.
 
 ## [Installation](INSTALL.md)
 
-For more details, see [the INSTALL page](INSTALL.md). If you’re having
-trouble with installation, consult the page and/or contact Toolchest
-directly.
-
 You can install the development version from
 [GitHub](https://github.com/trytoolchest/toolchest-client-r) with:
 
@@ -81,6 +77,12 @@ library(toolchest)
 
 The R client requires a version of **Python 3.6 or greater** with
 development libraries (`libpython`).
+
+### Troubleshooting
+
+For more details, see [the INSTALL page](INSTALL.md). If you’re having
+trouble with installation, consult the page and/or contact Toolchest
+directly.
 
 ## Configuration
 
