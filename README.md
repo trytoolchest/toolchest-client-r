@@ -17,8 +17,17 @@ here](https://github.com/trytoolchest/toolchest-client-python).
 
 ## Usage
 
-Using Toolchest is as simple as installing the client (listed as the
-`toolchest` package) and running the following:
+Using Toolchest is as simple as:
+
+1.  installing the client (listed as the `toolchest` package)
+
+2.  configuring Toolchest with your given Toolchest key:
+
+``` r
+toolchest::set_key("YOUR_TOOLCHEST_KEY")
+```
+
+3.  running the following:
 
 ``` r
 toolchest::tool_name(tool_args)
