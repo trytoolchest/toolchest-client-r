@@ -1,5 +1,3 @@
-INSTALL.Rmd
-================
 
 # Installation
 

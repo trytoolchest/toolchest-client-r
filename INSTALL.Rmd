@@ -1,5 +1,4 @@
 ---
-title: "INSTALL.Rmd"
 output: github_document
 ---
 
