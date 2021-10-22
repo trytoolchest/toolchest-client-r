@@ -65,8 +65,8 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #' manually.
 #'
 #' @param tool_args (optional) Additional arguments to be passed to Kraken 2.
-#' @param read_one Path of input file to be passed in as read one.
-#' @param read_two (optional) Path of input file to be passed in as read two.
+#' @param read_one Path (client-side) of input file to be passed in as read one.
+#' @param read_two (optional) Path (client-side) of input file to be passed in as read two.
 #' @param output_path Path (client-side) where the output will be downloaded.
 #' @param database_name (optional) Name (string) of database to use for Kraken 2 alignment.
 #' @param database_version (optional) Version (string) of database to use for Kraken 2 alignment.

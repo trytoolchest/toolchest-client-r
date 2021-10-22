@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Cai"
+  given-names: "Bryce"
+  orcid: "https://orcid.org/0000-0002-4444-520X"
+- family-names: "Lebovic"
+  given-names: "Noah"
+  orcid: "https://orcid.org/0000-0001-5449-1704"
+title: "toolchest-client-r"
+version: 0.7.6
+doi: 10.5281/zenodo.5587342
+date-released: 2021-06-09
+url: "https://github.com/trytoolchest/toolchest-client-r"
