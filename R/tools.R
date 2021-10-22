@@ -61,13 +61,12 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #'
 #' Starts a query for Kraken 2 using Toolchest.
 #'
-#' Currently, only a single file is supported as input.
-#'
-#' If left unspecified, inputs and output_path can be selected by the user
+#' If left unspecified, the input reads and output_path can be selected by the user
 #' manually.
 #'
 #' @param tool_args (optional) Additional arguments to be passed to Kraken 2.
-#' @param inputs Path (client-side) to be passed in as input.
+#' @param read_one Path of input file to be passed in as read one.
+#' @param read_two (optional) Path of input file to be passed in as read two.
 #' @param output_path Path (client-side) where the output will be downloaded.
 #' @param database_name (optional) Name (string) of database to use for Kraken 2 alignment.
 #' @param database_version (optional) Version (string) of database to use for Kraken 2 alignment.
@@ -77,13 +76,25 @@ cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
 #' \url{https://benlangmead.github.io/aws-indexes/k2}.
 #'
 #' @export
-kraken2 <- function(tool_args = "", inputs = NULL, output_path = NULL,
+kraken2 <- function(tool_args = "", read_one = NULL, read_two = NULL, output_path = NULL,
                     database_name = "standard", database_version = "1") {
-  inputs <- .validate.inpath(inputs)
+  if (is.null(read_one)) {
+    read_one <- .choose.path(file_descriptor = "read one")
+
+    if (is.null(read_two)) {
+      read_two <- .choose.path(is_optional = TRUE, file_descriptor = "read two")
+    } else {
+      read_two <- .validate.inpath(read_two)
+    }
+  } else {
+    read_one <- .validate.inpath(read_one)
+  }
+  cat(sprintf("Read one: %s.\n", read_one))
   output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
     tool_args = tool_args,
-    inputs = inputs,
+    read_one = read_one,
+    read_two = read_two,
     output_path = output_path,
     database_name = database_name,
     database_version = database_version
