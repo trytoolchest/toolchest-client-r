@@ -89,7 +89,6 @@ kraken2 <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
   } else {
     read_one <- .validate.inpath(read_one)
   }
-  cat(sprintf("Read one: %s.\n", read_one))
   output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
     tool_args = tool_args,
