@@ -5,7 +5,6 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/trytoolchest/toolchest-client-r/workflows/R-CMD-check/badge.svg)](https://github.com/trytoolchest/toolchest-client-r/actions)
 <!-- badges: end -->
 
 Toolchest provides APIs for scientific and bioinformatic data analysis.
