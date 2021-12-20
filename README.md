@@ -4,6 +4,8 @@
 # Toolchest R Client
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/trytoolchest/toolchest-client-r/workflows/R-CMD-check/badge.svg)](https://github.com/trytoolchest/toolchest-client-r/actions)
 <!-- badges: end -->
 
 Toolchest provides APIs for scientific and bioinformatic data analysis.
@@ -54,7 +56,6 @@ interactively.
 Toolchest currently supports the following tools:
 
 -   Bowtie 2 (`bowtie2`)
--   Cutadapt (`cutadapt`)
 -   Kraken 2 (`kraken2`)
 -   STAR (`STAR`)
 -   Unicycler (`unicycler`)
