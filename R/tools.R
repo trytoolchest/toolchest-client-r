@@ -25,38 +25,6 @@ bowtie2 <- function(tool_args = "", inputs = NULL, output_path = NULL, database_
   .do.toolchest.call(toolchest_client$bowtie2, toolchest_args)
 }
 
-#' Cutadapt Client
-#'
-#' Starts a query for Cutadapt using Toolchest.
-#'
-#' Currently, only a single .fastq file is supported as input.
-#' The output will be downloaded to output_path if specified.
-#'
-#' If left unspecified, inputs and output_path can be selected by the user
-#' manually.
-#'
-#' @param tool_args Additional arguments to be passed to Cutadapt.
-#' @param inputs Path (client-side) to be passed in as input.
-#' @param output_path Path (client-side) where the output file will be downloaded.
-#'
-#' @examples
-#' \dontrun{
-#' cutadapt(tool_args = "-a AATTCCGG")
-#' cutadapt(inputs = "C://Users/YourName/Documents/my_input_file.fastq", tool_args = "-a AATTCCGG")
-#' }
-#'
-#' @export
-cutadapt <- function(tool_args, inputs = NULL, output_path = NULL) {
-  inputs <- .validate.inpath(inputs)
-  output_path <- .validate.outpath(output_path)
-  toolchest_args <- list(
-    inputs = inputs,
-    output_path = output_path,
-    tool_args = tool_args
-  )
-  .do.toolchest.call(toolchest_client$cutadapt, toolchest_args)
-}
-
 #' Kraken 2 Client
 #'
 #' Starts a query for Kraken 2 using Toolchest.

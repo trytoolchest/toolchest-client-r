@@ -6,7 +6,8 @@
 \usage{
 kraken2(
   tool_args = "",
-  inputs = NULL,
+  read_one = NULL,
+  read_two = NULL,
   output_path = NULL,
   database_name = "standard",
   database_version = "1"
@@ -15,7 +16,9 @@ kraken2(
 \arguments{
 \item{tool_args}{(optional) Additional arguments to be passed to Kraken 2.}
 
-\item{inputs}{Path (client-side) to be passed in as input.}
+\item{read_one}{Path (client-side) of input file to be passed in as read one.}
+
+\item{read_two}{(optional) Path (client-side) of input file to be passed in as read two.}
 
 \item{output_path}{Path (client-side) where the output will be downloaded.}
 
@@ -27,9 +30,7 @@ kraken2(
 Starts a query for Kraken 2 using Toolchest.
 }
 \details{
-Currently, only a single file is supported as input.
-
-If left unspecified, inputs and output_path can be selected by the user
+If left unspecified, the input reads and output_path can be selected by the user
 manually.
 }
 \note{
