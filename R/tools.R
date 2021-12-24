@@ -128,7 +128,7 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' `database_name` should be specified as well.
 #'
 #' @export
-star <- function(tool_args = "", read_one = NULL, read_two = NULL,
+STAR <- function(tool_args = "", read_one = NULL, read_two = NULL,
                  output_path = NULL, database_name, database_version = NULL) {
   if (is.null(read_one)) {
     read_one <- .choose.path(file_descriptor = "read 1 (-1)")
@@ -145,7 +145,7 @@ star <- function(tool_args = "", read_one = NULL, read_two = NULL,
     database_name = database_name,
     database_version = database_version
   )
-  .do.toolchest.call(toolchest_client$star, toolchest_args)
+  .do.toolchest.call(toolchest_client$STAR, toolchest_args)
 }
 
 #' Test Pipeline Segment
