@@ -69,6 +69,45 @@ kraken2 <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
   .do.toolchest.call(toolchest_client$kraken2, toolchest_args)
 }
 
+#' MEGAHIT Client
+#'
+#' Starts a query for MEGAHIT using Toolchest.
+#'
+#' If left unspecified, read_one, read_two, and output_path can be selected by the user
+#' manually.
+#'
+#' @param tool_args (optional) Additional arguments to be passed to MEGAHIT.
+#' @param read_one (optional) `-1` inputs. Path (client-side, string) or list of paths for read 1 of paired-read input files.
+#' @param read_two (optional) `-2` inputs. Path (client-side, string) or list of paths for read 2 of paired-read input files.
+#' @param output_path Path (client-side) where the output will be downloaded.
+#' @param interleaved (optional) Path (string) or list of paths for interleaved paired-end files.
+#'
+#'
+#' @export
+megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_path = NULL,
+                    interleaved = NULL) {
+  if (is.null(read_one)) {
+    read_one <- .choose.path(is_optional = TRUE, file_descriptor = "read one")
+
+    if (is.null(read_two)) {
+      read_two <- .choose.path(is_optional = TRUE, file_descriptor = "read two")
+    } else {
+      read_two <- .validate.inpath(read_two)
+    }
+  } else {
+    read_one <- .validate.inpath(read_one)
+  }
+  output_path <- .validate.outpath(output_path)
+  toolchest_args <- list(
+    tool_args = tool_args,
+    read_one = read_one,
+    read_two = read_two,
+    output_path = output_path,
+    interleaved = interleaved,
+  )
+  .do.toolchest.call(toolchest_client$megahit, toolchest_args)
+}
+
 #' STAR Client
 #'
 #' Starts a query for STAR (mapping) using Toolchest.
@@ -89,7 +128,7 @@ kraken2 <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' `database_name` should be specified as well.
 #'
 #' @export
-STAR <- function(tool_args = "", read_one = NULL, read_two = NULL,
+star <- function(tool_args = "", read_one = NULL, read_two = NULL,
                  output_path = NULL, database_name, database_version = NULL) {
   if (is.null(read_one)) {
     read_one <- .choose.path(file_descriptor = "read 1 (-1)")
@@ -106,7 +145,7 @@ STAR <- function(tool_args = "", read_one = NULL, read_two = NULL,
     database_name = database_name,
     database_version = database_version
   )
-  .do.toolchest.call(toolchest_client$STAR, toolchest_args)
+  .do.toolchest.call(toolchest_client$star, toolchest_args)
 }
 
 #' Test Pipeline Segment

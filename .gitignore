@@ -12,3 +12,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# IDEs
+.idea/
+
+# emacs files
+*~
+*#

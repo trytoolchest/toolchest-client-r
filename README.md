@@ -56,7 +56,8 @@ Toolchest currently supports the following tools:
 
 -   Bowtie 2 (`bowtie2`)
 -   Kraken 2 (`kraken2`)
--   STAR (`STAR`)
+-   MEGAHIT (`megahit`) 
+-   STAR (`star`)
 -   Unicycler (`unicycler`)
 
 A `test` function is also supplied, which mimics how using a tool would
