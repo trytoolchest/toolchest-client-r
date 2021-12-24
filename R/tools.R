@@ -103,7 +103,7 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
     read_one = read_one,
     read_two = read_two,
     output_path = output_path,
-    interleaved = interleaved,
+    interleaved = interleaved
   )
   .do.toolchest.call(toolchest_client$megahit, toolchest_args)
 }
