@@ -16,6 +16,10 @@
 #' @return Path(s) to downloaded and decompressed files. If `skip_decompression` is enabled,
 #' returns the path to the archive.
 #'
+#' @note The `download` function can also be invoked from the output of any
+#' `toolchest::tool()` function call as `output$download(output_path)`. With an
+#' output, only the path to the local directory needs to be specified.
+#'
 #' @export
 download <- function(output_path, s3_uri = NULL, pipeline_segment_instance_id = NULL,
                      skip_decompression = FALSE) {

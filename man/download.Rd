@@ -35,3 +35,8 @@ Downloads the output of a previously run job.
 \details{
 One of \code{s3_uri} or \code{pipeline_segment_instance_id} must be provided.
 }
+\note{
+The \code{download} function can also be invoked from the output of any
+\code{toolchest::tool()} function call as \code{output$download(output_path)}. With an
+output, only the path to the local directory needs to be specified.
+}
