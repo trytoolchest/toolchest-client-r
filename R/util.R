@@ -5,5 +5,6 @@
 #' @param args List containing keyword arguments to be passed in to tool.
 .do.toolchest.call <- function(tool, args) {
   args <- args[!sapply(args, is.null)]
-  do.call(tool, args)
+  output <- do.call(tool, args)
+  return(output)
 }

@@ -13,10 +13,12 @@
 #' @param pipeline_segment_instance_id Pipeline segment instance ID of the job
 #' producing the output you would like to download.
 #' @param skip_decompression Whether to skip decompression of the downloaded file archive.
+#' @return Path(s) to downloaded and decompressed files. If `skip_decompression` is enabled,
+#' returns the path to the archive.
 #'
 #' @export
 download <- function(output_path, s3_uri = NULL, pipeline_segment_instance_id = NULL,
-                     skip_decompression = NULL) {
+                     skip_decompression = FALSE) {
   output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
     output_path = output_path,
@@ -24,5 +26,6 @@ download <- function(output_path, s3_uri = NULL, pipeline_segment_instance_id = 
     pipeline_segment_instance_id = pipeline_segment_instance_id,
     skip_decompression = skip_decompression,
   )
-  .do.toolchest.call(toolchest_client$download, toolchest_args)
+  output <- .do.toolchest.call(toolchest_client$download, toolchest_args)
+  return(output)
 }
