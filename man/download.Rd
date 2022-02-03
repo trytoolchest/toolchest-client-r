@@ -4,12 +4,7 @@
 \alias{download}
 \title{Download}
 \usage{
-download(
-  output_path,
-  s3_uri = NULL,
-  pipeline_segment_instance_id = NULL,
-  skip_decompression = FALSE
-)
+download(output_path, s3_uri = NULL, pipeline_segment_instance_id = NULL)
 }
 \arguments{
 \item{output_path}{Output path to which the file(s) will be downloaded.
@@ -22,8 +17,6 @@ job.}
 
 \item{pipeline_segment_instance_id}{Pipeline segment instance ID of the job
 producing the output you would like to download.}
-
-\item{skip_decompression}{Whether to skip decompression of the downloaded file archive.}
 }
 \value{
 Path(s) to downloaded and decompressed files. If \code{skip_decompression} is enabled,
