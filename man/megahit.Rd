@@ -23,6 +23,9 @@ megahit(
 
 \item{interleaved}{(optional) Path (string) or list of paths for interleaved paired-end files.}
 }
+\value{
+An object with output location data.
+}
 \description{
 Starts a query for MEGAHIT using Toolchest.
 }

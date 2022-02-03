@@ -8,7 +8,7 @@ download(
   output_path,
   s3_uri = NULL,
   pipeline_segment_instance_id = NULL,
-  skip_decompression = NULL
+  skip_decompression = FALSE
 )
 }
 \arguments{
@@ -24,6 +24,10 @@ job.}
 producing the output you would like to download.}
 
 \item{skip_decompression}{Whether to skip decompression of the downloaded file archive.}
+}
+\value{
+Path(s) to downloaded and decompressed files. If \code{skip_decompression} is enabled,
+returns the path to the archive.
 }
 \description{
 Downloads the output of a previously run job.

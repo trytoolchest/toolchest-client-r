@@ -23,6 +23,9 @@ unicycler(
 
 \item{output_path}{Path (client-side) where the output file will be downloaded.}
 }
+\value{
+An object with output location data.
+}
 \description{
 Runs Unicycler via Toolchest.
 }

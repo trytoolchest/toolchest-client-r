@@ -26,6 +26,9 @@ kraken2(
 
 \item{database_version}{(optional) Version (string) of database to use for Kraken 2 alignment.}
 }
+\value{
+An object with output location data.
+}
 \description{
 Starts a query for Kraken 2 using Toolchest.
 }
