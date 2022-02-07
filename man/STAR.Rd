@@ -26,6 +26,9 @@ STAR(
 
 \item{database_version}{(optional) Version (string) of database to use for STAR mapping.}
 }
+\value{
+An object with output location data.
+}
 \description{
 Starts a query for STAR (mapping) using Toolchest.
 }

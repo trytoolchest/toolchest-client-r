@@ -13,6 +13,9 @@ test(tool_args = "", inputs = NULL, output_path = NULL)
 
 \item{output_path}{Path (client-side) where the output file will be downloaded.}
 }
+\value{
+An object with output location data.
+}
 \description{
 Run a test pipeline segment via Toolchest. A plain text file containing 'success' is returned."
 }
