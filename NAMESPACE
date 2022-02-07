@@ -2,6 +2,7 @@
 
 export(STAR)
 export(bowtie2)
+export(download)
 export(get_key)
 export(install_toolchest)
 export(kraken2)
