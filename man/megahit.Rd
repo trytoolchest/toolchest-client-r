@@ -15,21 +15,20 @@ megahit(
 \arguments{
 \item{tool_args}{(optional) Additional arguments to be passed to MEGAHIT.}
 
-\item{read_one}{(optional) \code{-1} inputs. Path (client-side, string) or list of paths for read 1 of paired-read input files.}
+\item{read_one}{(optional) \code{-1} inputs. Path (string) or list of paths for read 1 of paired-read input files.}
 
-\item{read_two}{(optional) \code{-2} inputs. Path (client-side, string) or list of paths for read 2 of paired-read input files.}
+\item{read_two}{(optional) \code{-2} inputs. Path (string) or list of paths for read 2 of paired-read input files.}
 
-\item{output_path}{Path (client-side) where the output will be downloaded.}
+\item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
 
 \item{interleaved}{(optional) Path (string) or list of paths for interleaved paired-end files.}
 }
 \value{
-An object with output location data.
+Reference to an object with output location data.
 }
 \description{
 Starts a query for MEGAHIT using Toolchest.
 }
 \details{
-If left unspecified, read_one, read_two, and output_path can be selected by the user
-manually.
+If \code{output_path} is left unspecified, downloading will be skipped.
 }

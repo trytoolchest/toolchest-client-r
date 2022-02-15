@@ -1,26 +1,46 @@
-#' Download
+#' Download Functionality
 #'
-#' Downloads the output of a previously run job.
+#' If output download is skipped or halted unexpectedly during any Toolchest job,
+#' the output file(s) can be downloaded manually via the following functions:
+#' \itemize{
+#' \item{`toolchest::download(output_path, ...)`}{As a base function}
+#' \item{`output$download(output_path)`}{From the `output` returned by any
+#' Toolchest job, invoking `download` as a function
+#' }
+#' }
 #'
-#' One of `s3_uri` or `pipeline_segment_instance_id` must be provided.
+#' @details If `toolchest::download()` is used, one of `s3_uri` or
+#' `pipeline_segment_instance_id` must be provided. These can be found as
+#' variables of the  output object returned from a previous Toolchest function
+#' call. Contact Toolchest for assistance if the output details cannot
+#' be recovered.
 #'
-#' @param output_path Output path to which the file(s) will be downloaded.
-#' This should be a directory that already exists, but direct filenames
-#' are also supported.
+#' If `output$download()` is used from the `output` returned by any
+#' `toolchest::tool()` function call, then only `output_path` needs to be specified.
+#'
+#' @param output_path Path to a local directory where the file(s) will be downloaded.
 #' @param s3_uri URI of file contained in S3. This can be passed from
 #' the parameter `output$s3_uri` from the `output` returned by a previous
 #' job.
 #' @param pipeline_segment_instance_id Pipeline segment instance ID of the job
 #' producing the output you would like to download.
+#' @param skip_decompression Whether to skip decompression of the downloaded file archive.
 #' @return Path(s) to downloaded and decompressed files. If `skip_decompression` is enabled,
 #' returns the path to the archive.
 #'
-#' @note The `download` function can also be invoked from the output of any
-#' `toolchest::tool()` function call as `output$download(output_path)`. With an
-#' output, only the path to the local directory needs to be specified.
+#'
+#' @examples
+#' \dontrun{
+#' output <- toolchest::test(...)
+#' output$download(output_path=path)
+#'
+#' output <- toolchest::test(...)
+#' toolchest::download(output_path=path, s3_uri=output$s3_uri)
+#' }
 #'
 #' @export
-download <- function(output_path, s3_uri = NULL, pipeline_segment_instance_id = NULL) {
+download <- function(output_path, s3_uri = NULL, pipeline_segment_instance_id = NULL,
+                     skip_decompression = FALSE) {
   output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
     output_path = output_path,

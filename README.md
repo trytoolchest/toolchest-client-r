@@ -4,7 +4,6 @@
 # Toolchest R Client
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 Toolchest provides APIs for scientific and bioinformatic data analysis.
@@ -56,7 +55,7 @@ Toolchest currently supports the following tools:
 
 -   Bowtie 2 (`bowtie2`)
 -   Kraken 2 (`kraken2`)
--   MEGAHIT (`megahit`) 
+-   MEGAHIT (`megahit`)
 -   STAR (`STAR`)
 -   Unicycler (`unicycler`)
 

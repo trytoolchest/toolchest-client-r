@@ -21,10 +21,10 @@ unicycler(
 
 \item{long_reads}{Path of input file (FASTA) to be passed in as long reads (-l).}
 
-\item{output_path}{Path (client-side) where the output file will be downloaded.}
+\item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
 }
 \value{
-An object with output location data.
+Reference to an object with output location data.
 }
 \description{
 Runs Unicycler via Toolchest.
@@ -37,6 +37,5 @@ and option(s).
 
 At least one input filepath is needed for Toolchest to run Unicycler.
 
-The output path is needed. An option will pop up to select a filepath
-if \code{output_path} is unspecified.
+If \code{output_path} is left unspecified, downloading will be skipped.
 }
