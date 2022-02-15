@@ -16,25 +16,24 @@ kraken2(
 \arguments{
 \item{tool_args}{(optional) Additional arguments to be passed to Kraken 2.}
 
-\item{read_one}{Path (client-side) of input file to be passed in as read one.}
+\item{read_one}{Path of input file to be passed in as read one.}
 
-\item{read_two}{(optional) Path (client-side) of input file to be passed in as read two.}
+\item{read_two}{(optional) Path of input file to be passed in as read two.}
 
-\item{output_path}{Path (client-side) where the output will be downloaded.}
+\item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
 
 \item{database_name}{(optional) Name (string) of database to use for Kraken 2 alignment.}
 
 \item{database_version}{(optional) Version (string) of database to use for Kraken 2 alignment.}
 }
 \value{
-An object with output location data.
+Reference to an object with output location data.
 }
 \description{
 Starts a query for Kraken 2 using Toolchest.
 }
 \details{
-If left unspecified, the input reads and output_path can be selected by the user
-manually.
+If \code{output_path} is left unspecified, downloading will be skipped.
 }
 \note{
 If the database is unspecified, Kraken 2 will use the standard
