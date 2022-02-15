@@ -2,14 +2,17 @@
 % Please edit documentation in R/download.R
 \name{download}
 \alias{download}
-\title{Download}
+\title{Download Functionality}
 \usage{
-download(output_path, s3_uri = NULL, pipeline_segment_instance_id = NULL)
+download(
+  output_path,
+  s3_uri = NULL,
+  pipeline_segment_instance_id = NULL,
+  skip_decompression = FALSE
+)
 }
 \arguments{
-\item{output_path}{Output path to which the file(s) will be downloaded.
-This should be a directory that already exists, but direct filenames
-are also supported.}
+\item{output_path}{Path to a local directory where the file(s) will be downloaded.}
 
 \item{s3_uri}{URI of file contained in S3. This can be passed from
 the parameter \code{output$s3_uri} from the \code{output} returned by a previous
@@ -17,19 +20,40 @@ job.}
 
 \item{pipeline_segment_instance_id}{Pipeline segment instance ID of the job
 producing the output you would like to download.}
+
+\item{skip_decompression}{Whether to skip decompression of the downloaded file archive.}
 }
 \value{
 Path(s) to downloaded and decompressed files. If \code{skip_decompression} is enabled,
 returns the path to the archive.
 }
 \description{
-Downloads the output of a previously run job.
+If output download is skipped or halted unexpectedly during any Toolchest job,
+the output file(s) can be downloaded manually via the following functions:
+\itemize{
+\item{\code{toolchest::download(output_path, ...)}}{As a base function}
+\item{\code{output$download(output_path)}}{From the \code{output} returned by any
+Toolchest job, invoking \code{download} as a function
+}
+}
 }
 \details{
-One of \code{s3_uri} or \code{pipeline_segment_instance_id} must be provided.
+If \code{toolchest::download()} is used, one of \code{s3_uri} or
+\code{pipeline_segment_instance_id} must be provided. These can be found as
+variables of the  output object returned from a previous Toolchest function
+call. Contact Toolchest for assistance if the output details cannot
+be recovered.
+
+If \code{output$download()} is used from the \code{output} returned by any
+\code{toolchest::tool()} function call, then only \code{output_path} needs to be specified.
 }
-\note{
-The \code{download} function can also be invoked from the output of any
-\code{toolchest::tool()} function call as \code{output$download(output_path)}. With an
-output, only the path to the local directory needs to be specified.
+\examples{
+\dontrun{
+output <- toolchest::test(...)
+output$download(output_path=path)
+
+output <- toolchest::test(...)
+toolchest::download(output_path=path, s3_uri=output$s3_uri)
+}
+
 }

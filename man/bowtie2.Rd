@@ -6,7 +6,7 @@
 \usage{
 bowtie2(
   tool_args = "",
-  inputs = NULL,
+  inputs,
   output_path = NULL,
   database_name,
   database_version
@@ -15,18 +15,20 @@ bowtie2(
 \arguments{
 \item{tool_args}{(optional) Additional arguments to be passed to Bowtie 2.}
 
-\item{inputs}{Path or list of paths (client-side) to be passed in as input.}
+\item{inputs}{Path or list of paths to be passed in as input.}
 
-\item{output_path}{Path (client-side) where the output file will be downloaded.}
+\item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
 
 \item{database_name}{Name (string) of database to use for Bowtie 2 alignment.}
 
 \item{database_version}{Version (string) of database to use for Bowtie 2 alignment.}
 }
+\value{
+Reference to an object with output location data.
+}
 \description{
 Starts a query for Bowtie 2 (for alignment) using Toolchest.
 }
 \details{
-If left unspecified, inputs and output_path can be selected by the user
-manually.
+If \code{output_path} is left unspecified, downloading will be skipped.
 }

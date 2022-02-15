@@ -6,7 +6,7 @@
 \usage{
 STAR(
   tool_args = "",
-  read_one = NULL,
+  read_one,
   read_two = NULL,
   output_path = NULL,
   database_name,
@@ -20,21 +20,20 @@ STAR(
 
 \item{read_two}{(optional) Path of input file to be passed in as Read 2 (-2).}
 
-\item{output_path}{Path (client-side) where the output will be downloaded.}
+\item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
 
 \item{database_name}{Name (string) of database to use for STAR mapping.}
 
 \item{database_version}{(optional) Version (string) of database to use for STAR mapping.}
 }
 \value{
-An object with output location data.
+Reference to an object with output location data.
 }
 \description{
 Starts a query for STAR (mapping) using Toolchest.
 }
 \details{
-If left unspecified, the input reads and output_path can be selected by the
-user manually.
+If \code{output_path} is left unspecified, downloading will be skipped.
 }
 \note{
 \code{read_one} is required. If paired-end reads are not used, the input

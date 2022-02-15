@@ -4,18 +4,21 @@
 \alias{test}
 \title{Test Pipeline Segment}
 \usage{
-test(tool_args = "", inputs = NULL, output_path = NULL)
+test(tool_args = "", inputs, output_path = NULL)
 }
 \arguments{
 \item{tool_args}{Additional arguments, present to maintain a consistent interface. This is disregarded.}
 
 \item{inputs}{Path or list of paths (client-side) to be passed in as input.}
 
-\item{output_path}{Path (client-side) where the output file will be downloaded.}
+\item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
 }
 \value{
-An object with output location data.
+Reference to an object with output location data.
 }
 \description{
 Run a test pipeline segment via Toolchest. A plain text file containing 'success' is returned."
+}
+\details{
+If \code{output_path} is left unspecified, downloading will be skipped.
 }
