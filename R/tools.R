@@ -43,7 +43,7 @@ bowtie2 <- function(tool_args = "", inputs, output_path = NULL, database_name, d
 #' \url{https://benlangmead.github.io/aws-indexes/k2}.
 #'
 #' @export
-kraken2 <- function(tool_args = "", read_one = NULL, read_two = NULL, output_path = NULL,
+kraken2 <- function(tool_args = "", read_one, read_two = NULL, output_path = NULL,
                     database_name = "standard", database_version = "1") {
   toolchest_args <- list(
     tool_args = tool_args,
@@ -104,7 +104,7 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' `database_name` should be specified as well.
 #'
 #' @export
-STAR <- function(tool_args = "", read_one = NULL, read_two = NULL,
+STAR <- function(tool_args = "", read_one, read_two = NULL,
                  output_path = NULL, database_name, database_version = NULL) {
   output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
@@ -131,7 +131,7 @@ STAR <- function(tool_args = "", read_one = NULL, read_two = NULL,
 #' @return Reference to an object with output location data.
 #'
 #' @export
-test <- function(tool_args = "", inputs = NULL, output_path = NULL) {
+test <- function(tool_args = "", inputs, output_path = NULL) {
   toolchest_args <- list(
     inputs = inputs,
     output_path = output_path,

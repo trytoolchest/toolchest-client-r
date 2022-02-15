@@ -6,7 +6,7 @@
 \usage{
 kraken2(
   tool_args = "",
-  read_one = NULL,
+  read_one,
   read_two = NULL,
   output_path = NULL,
   database_name = "standard",

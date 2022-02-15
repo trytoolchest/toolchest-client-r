@@ -4,7 +4,7 @@
 \alias{test}
 \title{Test Pipeline Segment}
 \usage{
-test(tool_args = "", inputs = NULL, output_path = NULL)
+test(tool_args = "", inputs, output_path = NULL)
 }
 \arguments{
 \item{tool_args}{Additional arguments, present to maintain a consistent interface. This is disregarded.}
