@@ -10,9 +10,9 @@
 #' }
 #'
 #' @details If `toolchest::download()` is used, one of `s3_uri` or
-#' `pipeline_segment_instance_id` must be provided. These can be found as
-#' variables of the  output object returned from a previous Toolchest function
-#' call. Contact Toolchest for assistance if the output details cannot
+#' `run_id` must be provided. These can be found as variables of the
+#' output object returned from a previous Toolchest function call.
+#' Contact Toolchest for assistance if the output details cannot
 #' be recovered.
 #'
 #' If `output$download()` is used from the `output` returned by any
@@ -22,8 +22,7 @@
 #' @param s3_uri URI of file contained in S3. This can be passed from
 #' the parameter `output$s3_uri` from the `output` returned by a previous
 #' job.
-#' @param pipeline_segment_instance_id Pipeline segment instance ID of the job
-#' producing the output you would like to download.
+#' @param run_id Run ID of the job producing the output you would like to download.
 #' @param skip_decompression Whether to skip decompression of the downloaded file archive.
 #' @return Path(s) to downloaded and decompressed files. If `skip_decompression` is enabled,
 #' returns the path to the archive.
@@ -39,13 +38,18 @@
 #' }
 #'
 #' @export
-download <- function(output_path, s3_uri = NULL, pipeline_segment_instance_id = NULL,
-                     skip_decompression = FALSE) {
-  output_path <- .validate.outpath(output_path)
+download <- function(output_path, s3_uri = NULL, run_id = NULL,
+                     pipeline_segment_instance_id = NULL, skip_decompression = FALSE) {
+  if (pipeline_segment_instance_id) {
+    lifecycle::deprecate_warn("0.7.12", "download(pipeline_segment_instance_id)", "download(run_id)")
+    if (!run_id) {
+      run_id <- pipeline_segment_instance_id
+    }
+  }
   toolchest_args <- list(
     output_path = output_path,
     s3_uri = s3_uri,
-    pipeline_segment_instance_id = pipeline_segment_instance_id
+    run_id = run_id,
   )
   output <- .do.toolchest.call(toolchest_client$download, toolchest_args)
   return(output)
