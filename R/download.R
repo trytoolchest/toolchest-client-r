@@ -40,9 +40,9 @@
 #' @export
 download <- function(output_path, s3_uri = NULL, run_id = NULL,
                      pipeline_segment_instance_id = NULL, skip_decompression = FALSE) {
-  if (pipeline_segment_instance_id) {
+  if (!is.null(pipeline_segment_instance_id)) {
     lifecycle::deprecate_warn("0.7.12", "download(pipeline_segment_instance_id)", "download(run_id)")
-    if (!run_id) {
+    if (is.null(run_id)) {
       run_id <- pipeline_segment_instance_id
     }
   }
@@ -50,6 +50,7 @@ download <- function(output_path, s3_uri = NULL, run_id = NULL,
     output_path = output_path,
     s3_uri = s3_uri,
     run_id = run_id,
+    skip_decompression = skip_decompression
   )
   output <- .do.toolchest.call(toolchest_client$download, toolchest_args)
   return(output)

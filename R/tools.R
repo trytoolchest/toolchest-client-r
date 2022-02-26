@@ -94,7 +94,7 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' @param read_one Path of input file to be passed in as Read 1 (-1).
 #' @param read_two (optional) Path of input file to be passed in as Read 2 (-2).
 #' @param output_path (optional) Path to a directory where the output file(s) will be downloaded.
-#' @param database_name Name (string) of database to use for STAR mapping.
+#' @param database_name (optional) Name (string) of database to use for STAR mapping. Defaults to "GRCh38".
 #' @param database_version (optional) Version (string) of database to use for STAR mapping.
 #' @return Reference to an object with output location data.
 #'
@@ -105,7 +105,7 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #'
 #' @export
 STAR <- function(tool_args = "", read_one, read_two = NULL,
-                 output_path = NULL, database_name, database_version = NULL) {
+                 output_path = NULL, database_name = NULL, database_version = NULL) {
   output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
     tool_args = tool_args,
