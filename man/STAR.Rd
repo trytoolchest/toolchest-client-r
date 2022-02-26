@@ -9,7 +9,7 @@ STAR(
   read_one,
   read_two = NULL,
   output_path = NULL,
-  database_name,
+  database_name = NULL,
   database_version = NULL
 )
 }
@@ -22,7 +22,7 @@ STAR(
 
 \item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
 
-\item{database_name}{Name (string) of database to use for STAR mapping.}
+\item{database_name}{(optional) Name (string) of database to use for STAR mapping. Defaults to "GRCh38".}
 
 \item{database_version}{(optional) Version (string) of database to use for STAR mapping.}
 }

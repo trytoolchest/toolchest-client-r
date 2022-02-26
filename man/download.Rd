@@ -7,6 +7,7 @@
 download(
   output_path,
   s3_uri = NULL,
+  run_id = NULL,
   pipeline_segment_instance_id = NULL,
   skip_decompression = FALSE
 )
@@ -18,8 +19,7 @@ download(
 the parameter \code{output$s3_uri} from the \code{output} returned by a previous
 job.}
 
-\item{pipeline_segment_instance_id}{Pipeline segment instance ID of the job
-producing the output you would like to download.}
+\item{run_id}{Run ID of the job producing the output you would like to download.}
 
 \item{skip_decompression}{Whether to skip decompression of the downloaded file archive.}
 }
@@ -39,9 +39,9 @@ Toolchest job, invoking \code{download} as a function
 }
 \details{
 If \code{toolchest::download()} is used, one of \code{s3_uri} or
-\code{pipeline_segment_instance_id} must be provided. These can be found as
-variables of the  output object returned from a previous Toolchest function
-call. Contact Toolchest for assistance if the output details cannot
+\code{run_id} must be provided. These can be found as variables of the
+output object returned from a previous Toolchest function call.
+Contact Toolchest for assistance if the output details cannot
 be recovered.
 
 If \code{output$download()} is used from the \code{output} returned by any
