@@ -8,8 +8,8 @@ jobs:
       - run:
           name: Run sanity test of R wrapper
           command: |
-            devtools::install_github("trytoolchest/toolchest-client-r", ref="$CIRCLE_BRANCH")
-            library(toolchest)
+            R -e "devtools::install_github('trytoolchest/toolchest-client-r', ref='$CIRCLE_BRANCH')"
+            R -e "library(toolchest)"
 
 workflows:
   version: 2
