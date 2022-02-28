@@ -1,7 +1,8 @@
 version: 2.1
 jobs:
   test:
-    executor: rocker/rstudio:latest
+    docker:
+      - image: rocker/rstudio:latest
     steps:
       - checkout
       - run:
