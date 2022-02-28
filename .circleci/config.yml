@@ -1,0 +1,22 @@
+version: 2.1
+jobs:
+  test:
+    executor: rocker/rstudio:latest
+    steps:
+      - checkout
+      - run:
+          name: Run sanity test of R wrapper
+          command: |
+            devtools::install_github("trytoolchest/toolchest-client-r", ref="$CIRCLE_BRANCH")
+            library(toolchest)
+
+workflows:
+  version: 2
+  test_basic_install:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - main
+                - staging
