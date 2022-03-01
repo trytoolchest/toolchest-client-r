@@ -23,7 +23,7 @@ BugReports: https://github.com/gotoolchest/toolchest-client-r/issues
 Imports:
     httr,
     lifecycle,
-    reticulate,
+    reticulate (>= 1.24),
     utils
 Suggests: 
     testthat (>= 3.0.0)
