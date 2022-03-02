@@ -2,7 +2,7 @@ version: '2.1'
 orbs:
   macos: circleci/macos@1.0
 jobs:
-  build-test:
+  test:
     macos:
       xcode: 12.5.1
     steps:
