@@ -2,7 +2,7 @@ version: '2.1'
 orbs:
   macos: circleci/macos@1.0
 jobs:
-  test_install:
+  test-install:
     macos:
       xcode: 12.5.1
     steps:
@@ -23,10 +23,10 @@ jobs:
             code
 workflows:
     test:
-      - jobs:
-          - test_install:
-              filters:
-                branches:
-                  only:
-                    - main
-                    - staging
+      jobs:
+        - test-install:
+            filters:
+              branches:
+                only:
+                  - main
+                  - staging
