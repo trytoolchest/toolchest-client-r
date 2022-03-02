@@ -2,7 +2,7 @@ version: '2.1'
 orbs:
   macos: circleci/macos@1.0
 jobs:
-  test:
+  test_install:
     macos:
       xcode: 12.5.1
     steps:
@@ -21,11 +21,12 @@ jobs:
             library(toolchest)
             
             code
-test_basic_install:
-    jobs:
-      - test:
-          filters:
-            branches:
-              only:
-                - main
-                - staging
+workflows:
+    test:
+      - jobs:
+          - test_install:
+              filters:
+                branches:
+                  only:
+                    - main
+                    - staging
