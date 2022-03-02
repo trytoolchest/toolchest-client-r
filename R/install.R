@@ -75,8 +75,7 @@ python_is_compatible <- function(python_path) {
     return(FALSE)
   }
 
-  if (!is.null(python_info$libpython) &&
-    utils::compareVersion(python_info$version, MIN_PYTHON_VERSION) >= 0) {
+  if (utils::compareVersion(python_info$version, MIN_PYTHON_VERSION) >= 0) {
     return(TRUE)
   }
   return(FALSE)
@@ -138,8 +137,7 @@ find_compatible_python <- function() {
   # custom error message depending on OS.
   if (is.null(python_path)) {
     error_msg <- paste(
-      "No compatible version of Python (>=3.6) with development libraries ",
-      "(libpython) found, which are needed for parallelization.",
+      "No compatible version of Python (>=3.6) found.",
       sep = "\n"
     )
     packageStartupMessage(error_msg)
