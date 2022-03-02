@@ -1,19 +1,27 @@
-version: 2.1
+version: '2.1'
+orbs:
+  macos: circleci/macos@1.0
 jobs:
-  test:
-    docker:
-      - image: rocker/verse:latest
+  build-test:
+    macos:
+      xcode: 12.5.1
     steps:
       - checkout
+      - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
       - run:
           name: Run sanity test of R wrapper
-          command: |
-            R -e "devtools::install_github('trytoolchest/toolchest-client-r', ref='$CIRCLE_BRANCH')"
-            R -e "library(toolchest)"
-
-workflows:
-  version: 2
-  test_basic_install:
+          command: | # this doesn't cache dependencies, and takes quite a while – todo: optimize
+            NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+            brew install r -f
+            R --no-save <<code
+            install.packages('devtools', repos = "http://cran.us.r-project.org")
+            devtools::install_github('trytoolchest/toolchest-client-r', ref='$CIRCLE_BRANCH')
+            library(toolchest)
+            
+            code
+test_basic_install:
     jobs:
       - test:
           filters:
