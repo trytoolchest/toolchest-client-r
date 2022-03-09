@@ -44,12 +44,7 @@ install_with_conda <- function() {
   # Install or update miniconda
   # (Reticulate defaults to Python 3.8 with miniconda)
   packageStartupMessage("Updating conda configuration...")
-  miniconda_is_installed <- tryCatch(
-    reticulate::install_miniconda(),
-    error = function(cnd) {
-      reticulate::miniconda_update()
-    }
-  )
+  miniconda_is_installed <- try(reticulate::install_miniconda(), silent = TRUE)
   if(!("r-reticulate" %in% reticulate::conda_list()$name)) {
     reticulate::conda_create("r-reticulate")
   }
