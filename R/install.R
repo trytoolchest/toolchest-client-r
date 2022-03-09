@@ -72,9 +72,12 @@ install_with_conda <- function() {
 }
 
 install_with_virtualenv <- function() {
-  # (Reticulate defaults to latest version of Python, or at least 3.8)
+  # TODO: deprecate assigning a default version with reticulate 1.25
+  PYTHON_VERSION <- "3.8.9"
+
+  # (Reticulate 1.25+ defaults to latest version of Python, or at least 3.8)
   packageStartupMessage("Installing custom Python...")
-  python_path <- reticulate::install_python()
+  python_path <- reticulate::install_python(version = PYTHON_VERSION)
 
   packageStartupMessage("Creating custom environment...")
   reticulate::virtualenv_create(envname = "r-reticulate", python = python_path)

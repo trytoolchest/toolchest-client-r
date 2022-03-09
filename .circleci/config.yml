@@ -14,6 +14,7 @@ jobs:
             NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
             eval "$(/opt/homebrew/bin/brew shellenv)"
+
             brew install r -f
             R --no-save \<<code
             install.packages('devtools', repos = "http://cran.us.r-project.org")
