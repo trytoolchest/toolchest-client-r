@@ -31,10 +31,10 @@
 #' @examples
 #' \dontrun{
 #' output <- toolchest::test(...)
-#' output$download(output_path=path)
+#' output$download(output_path = path)
 #'
 #' output <- toolchest::test(...)
-#' toolchest::download(output_path=path, s3_uri=output$s3_uri)
+#' toolchest::download(output_path = path, s3_uri = output$s3_uri)
 #' }
 #'
 #' @export
