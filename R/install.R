@@ -50,13 +50,18 @@ install_with_conda <- function() {
       reticulate::miniconda_update()
     }
   )
+  if(!("r-reticulate" %in% reticulate::conda_list()$name)) {
+    reticulate::conda_create("r-reticulate")
+  }
 
   # Point reticulate to miniconda
-  reticulate::use_miniconda(condaenv = "r-reticulate")
+  reticulate::use_miniconda("r-reticulate")
 
   # If python is out-of-date in miniconda, force reinstall
   if (!python_is_compatible()) {
+    reticulate::conda_remove("r-reticulate")
     reticulate::install_miniconda(force = TRUE)
+    reticulate::conda_create("r-reticulate")
   }
 
   # Install Toolchest client.
