@@ -19,7 +19,7 @@ jobs:
             install.packages('devtools', repos = "http://cran.us.r-project.org")
             devtools::install_github('trytoolchest/toolchest-client-r', ref='$CIRCLE_BRANCH')
             library(toolchest)
-            
+
             code
 workflows:
     test:
@@ -30,3 +30,4 @@ workflows:
                 only:
                   - main
                   - staging
+                  - feat/redo-install
