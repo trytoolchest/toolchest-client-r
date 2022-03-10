@@ -24,6 +24,8 @@
 #' job.
 #' @param run_id Run ID of the job producing the output you would like to download.
 #' @param skip_decompression Whether to skip decompression of the downloaded file archive.
+#' @param pipeline_segment_instance_id (DEPRECATED) Pipeline segment instance ID.
+#' Replace this argument with `run_id` instead.
 #' @return Path(s) to downloaded and decompressed files. If `skip_decompression` is enabled,
 #' returns the path to the archive.
 #'

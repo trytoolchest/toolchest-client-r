@@ -37,13 +37,6 @@ jobs:
 workflows:
     test:
       jobs:
-        - test-install-macos:
-            filters:
-              branches:
-                only:
-                  - main
-                  - staging
-                  - feat/redo-install
         - test-install-rocker-devtools:
             filters:
               branches:
