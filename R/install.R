@@ -50,13 +50,14 @@ install_with_conda <- function() {
   }
 
   # Point reticulate to miniconda
-  reticulate::use_miniconda("r-reticulate")
+  reticulate::use_miniconda("r-reticulate", required = TRUE)
 
   # If python is out-of-date in miniconda, force reinstall
   if (!python_is_compatible()) {
     reticulate::conda_remove("r-reticulate")
     reticulate::install_miniconda(force = TRUE)
     reticulate::conda_create("r-reticulate")
+    reticulate::use_miniconda("r-reticulate", required = TRUE)
   }
 
   # Install Toolchest client.
@@ -80,15 +81,16 @@ install_with_virtualenv <- function() {
   python_path <- reticulate::install_python(version = PYTHON_VERSION)
 
   packageStartupMessage("Creating custom environment...")
-  reticulate::virtualenv_create(envname = "r-reticulate", python = python_path)
+  reticulate::virtualenv_create("r-reticulate", python = python_path)
 
   # Point reticulate to virtualenv
-  reticulate::use_virtualenv(virtualenv = "r-reticulate")
+  reticulate::use_virtualenv("r-reticulate", required = TRUE)
 
   # If python is out-of-date in virtualenv, force reinstall
   if (!python_is_compatible()) {
-    reticulate::virtualenv_remove(envname = "r-reticulate", confirm = FALSE)
-    reticulate::virtualenv_create(envname = "r-reticulate", python = python_path)
+    reticulate::virtualenv_remove("r-reticulate", confirm = FALSE)
+    reticulate::virtualenv_create("r-reticulate", python = python_path)
+    reticulate::use_virtualenv("r-reticulate", required = TRUE)
   }
 
   # Install Toolchest client.
