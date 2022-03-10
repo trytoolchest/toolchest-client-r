@@ -21,16 +21,15 @@ jobs:
             library(toolchest)
 
             code
-  test-install-rocker-base:
+  test-install-rocker-devtools:
     docker:
-      - image: rocker/r-ver:4.0.2
+      - image: rocker/tidyverse:4.0.2
     steps:
       - checkout
       - run:
           name: Run sanity test of R wrapper
           command: |
             R --no-save \<<code
-            install.packages('devtools', repos = "http://cran.us.r-project.org")
             devtools::install_github('trytoolchest/toolchest-client-r', ref='$CIRCLE_BRANCH')
             library(toolchest)
 
@@ -45,7 +44,7 @@ workflows:
                   - main
                   - staging
                   - feat/redo-install
-        - test-install-rocker-base:
+        - test-install-rocker-devtools:
             filters:
               branches:
                 only:
