@@ -45,7 +45,9 @@ jobs:
 
       - uses: r-lib/actions/check-r-package@v2
         with:
-          error-on: 'error'
+          upload-snapshots: true
+          upload-results: true
+          error-on: '"error"'
         # This is non-canonical since CRAN requires R CMD check to be free
         # of warnings as well, but this option overlooks the phantom warnings +
         # notes caused by the toolchest::test method, which are likely due to a
