@@ -8,3 +8,4 @@
 ^INSTALL\.Rmd$
 ^INSTALL\.md$
 ^demo\.R$
+^README\.md$

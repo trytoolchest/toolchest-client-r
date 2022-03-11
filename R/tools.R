@@ -106,7 +106,6 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' @export
 STAR <- function(tool_args = "", read_one, read_two = NULL,
                  output_path = NULL, database_name = NULL, database_version = NULL) {
-  output_path <- .validate.outpath(output_path)
   toolchest_args <- list(
     tool_args = tool_args,
     read_one = read_one,

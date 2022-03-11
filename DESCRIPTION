@@ -21,7 +21,6 @@ RoxygenNote: 7.1.2
 URL: https://github.com/trytoolchest/toolchest-client-r
 BugReports: https://github.com/trytoolchest/toolchest-client-r/issues
 Imports:
-    httr,
     lifecycle,
     reticulate (>= 1.24),
     utils

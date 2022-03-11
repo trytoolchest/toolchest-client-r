@@ -107,8 +107,8 @@ install_with_virtualenv <- function() {
 python_is_compatible <- function(python_path) {
   MIN_PYTHON_VERSION <- "3.6"
 
-  path_is_python <- try(python_info <- reticulate::py_discover_config(), silent = TRUE)
-  if (class(path_is_python) == "try-error") {
+  path_is_python <- tryCatch(python_info <- reticulate::py_discover_config(), silent = TRUE)
+  if (inherits(path_is_python, "try-error")) {
     return(FALSE)
   }
 
