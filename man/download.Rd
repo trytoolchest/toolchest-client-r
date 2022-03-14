@@ -21,6 +21,9 @@ job.}
 
 \item{run_id}{Run ID of the job producing the output you would like to download.}
 
+\item{pipeline_segment_instance_id}{(DEPRECATED) Pipeline segment instance ID.
+Replace this argument with \code{run_id} instead.}
+
 \item{skip_decompression}{Whether to skip decompression of the downloaded file archive.}
 }
 \value{
@@ -50,10 +53,10 @@ If \code{output$download()} is used from the \code{output} returned by any
 \examples{
 \dontrun{
 output <- toolchest::test(...)
-output$download(output_path=path)
+output$download(output_path = path)
 
 output <- toolchest::test(...)
-toolchest::download(output_path=path, s3_uri=output$s3_uri)
+toolchest::download(output_path = path, s3_uri = output$s3_uri)
 }
 
 }

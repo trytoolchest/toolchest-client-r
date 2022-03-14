@@ -4,6 +4,8 @@
 # Toolchest R Client
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/trytoolchest/toolchest-client-r/workflows/R-CMD-check/badge.svg)](https://github.com/trytoolchest/toolchest-client-r/actions)
 <!-- badges: end -->
 
 Toolchest provides APIs for scientific and bioinformatic data analysis.
@@ -73,10 +75,24 @@ devtools::install_github("trytoolchest/toolchest-client-r")
 library(toolchest)
 ```
 
+### R dependencies
+
+The R client requires the
+[`reticulate`](https://rstudio.github.io/reticulate/index.html) package,
+version **1.24 or greater**.
+
+Install or update `reticulate` with:
+
+``` r
+install.packages("reticulate")
+```
+
 ### Python requirements
 
-The R client requires a version of **Python 3.6 or greater** with
-development libraries (`libpython`).
+The R client requires a version of **Python 3.6 or greater**.
+
+A compatible version will automatically be installed via miniconda or
+pyenv, using R’s `reticulate` package.
 
 ### Troubleshooting
 
@@ -128,8 +144,8 @@ readRenviron("~/.Renviron")
 ## Help / Documentation
 
 Documentation for each tool can be accessed within R, just like for any
-other R function. For help on how to use an individual tool, use either
-of the following:
+other function in an R package. For help on how to use an individual
+tool, use either of the following:
 
 -   `help(tool_name)`
 -   `?toolchest::tool_name` (or simply `?tool_name`)

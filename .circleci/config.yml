@@ -1,8 +1,8 @@
 version: '2.1'
 orbs:
-  macos: circleci/macos@1.0
+  macos: circleci/macos@2.1.0
 jobs:
-  test-install:
+  test-install-macos:
     macos:
       xcode: 12.5.1
     steps:
@@ -19,14 +19,29 @@ jobs:
             install.packages('devtools', repos = "http://cran.us.r-project.org")
             devtools::install_github('trytoolchest/toolchest-client-r', ref='$CIRCLE_BRANCH')
             library(toolchest)
-            
+
+            code
+  test-install-rocker-devtools:
+    docker:
+      - image: rocker/tidyverse:4.0.2
+    steps:
+      - checkout
+      - run:
+          name: Run sanity test of R wrapper
+          command: |
+            R --no-save \<<code
+            devtools::install_github('trytoolchest/toolchest-client-r', ref='$CIRCLE_BRANCH')
+            library(toolchest)
+
             code
 workflows:
     test:
       jobs:
-        - test-install:
+        - test-install-rocker-devtools:
             filters:
               branches:
                 only:
                   - main
                   - staging
+                  - feat/redo-install
+

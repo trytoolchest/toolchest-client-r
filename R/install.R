@@ -8,40 +8,15 @@
 install_toolchest <- function() {
   packageStartupMessage("Installing Toolchest client... ")
 
-  # Disable the prompt to install with conda, which is not compatible
-  # on Mac/Linux due to the pysam install.
-  Sys.setenv(RETICULATE_MINICONDA_ENABLED = FALSE)
-
-  # check python configuration
-  packageStartupMessage("Checking Python configuration...")
-  python_path <- NULL
-  if (reticulate::virtualenv_exists("r-reticulate")) {
-    python_path <- reticulate::virtualenv_python("r-reticulate")
-    # Rebuild r-reticulate environment if built on an incompatible Python version.
-    if (!python_is_compatible(python_path)) {
-      packageStartupMessage("Env r-reticulate has an incompatible Python version. Searching for compatible Python...")
-      python_path <- find_compatible_python() # throws error if not found
-      packageStartupMessage("Compatible Python found. Env r-reticulate must be rebuilt.")
-      choice <- utils::askYesNo("Would you like to continue the install? This will overwrite the r-reticulate environment.", default = FALSE)
-      if (is.null(choice) || !choice) {
-        stop("Toolchest install cancelled.", call. = FALSE)
-      }
-      reticulate::virtualenv_remove("r-reticulate", confirm = FALSE)
-    }
-  } else {
-    python_path <- find_compatible_python()
-  }
-
   packageStartupMessage("Configuring reticulate...")
-  configure_virtualenv("r-reticulate", python_path)
-
-  packageStartupMessage("Installing Toolchest into environment...")
-  reticulate::virtualenv_install(
-    envname = "r-reticulate",
-    packages = "toolchest_client",
-    ignore_installed = TRUE
+  tryCatch(
+    # Try a miniconda-based install.
+    toolchest_client <- install_with_conda(),
+    error = function(cnd) {
+      packageStartupMessage("Miniconda installation failed. Attempting with base Python:")
+      toolchest_client <- install_with_virtualenv()
+    }
   )
-  toolchest_client <<- reticulate::import("toolchest_client")
 
   packageStartupMessage("The Toolchest client has been installed!")
 
@@ -65,13 +40,75 @@ install_toolchest <- function() {
   invisible(toolchest_client)
 }
 
+install_with_conda <- function() {
+  # Install or update miniconda
+  # (Reticulate defaults to Python 3.8 with miniconda)
+  packageStartupMessage("Updating conda configuration...")
+  miniconda_is_installed <- try(reticulate::install_miniconda(), silent = TRUE)
+  if(!("r-reticulate" %in% reticulate::conda_list()$name)) {
+    reticulate::conda_create("r-reticulate")
+  }
+
+  # Point reticulate to miniconda
+  reticulate::use_miniconda("r-reticulate", required = TRUE)
+
+  # If python is out-of-date in miniconda, force reinstall
+  if (!python_is_compatible()) {
+    reticulate::conda_remove("r-reticulate")
+    reticulate::install_miniconda(force = TRUE)
+    reticulate::conda_create("r-reticulate")
+    reticulate::use_miniconda("r-reticulate", required = TRUE)
+  }
+
+  # Install Toolchest client.
+  packageStartupMessage("Installing Toolchest into environment...")
+  reticulate::conda_install(
+    envname = "r-reticulate",
+    packages = "toolchest_client",
+    pip = TRUE,
+    pip_ignore_installed = TRUE
+  )
+  toolchest_client <<- reticulate::import("toolchest_client", delay_load = TRUE)
+  return(toolchest_client)
+}
+
+install_with_virtualenv <- function() {
+  # TODO: deprecate assigning a default version with reticulate 1.25
+  PYTHON_VERSION <- "3.8.7"
+
+  # (Reticulate 1.25+ defaults to latest version of Python, or at least 3.8)
+  packageStartupMessage("Installing custom Python...")
+  python_path <- reticulate::install_python(version = PYTHON_VERSION)
+
+  packageStartupMessage("Creating custom environment...")
+  reticulate::virtualenv_create("r-reticulate", python = python_path)
+
+  # Point reticulate to virtualenv
+  reticulate::use_virtualenv("r-reticulate", required = TRUE)
+
+  # If python is out-of-date in virtualenv, force reinstall
+  if (!python_is_compatible()) {
+    reticulate::virtualenv_remove("r-reticulate", confirm = FALSE)
+    reticulate::virtualenv_create("r-reticulate", python = python_path)
+    reticulate::use_virtualenv("r-reticulate", required = TRUE)
+  }
+
+  # Install Toolchest client.
+  packageStartupMessage("Installing Toolchest into environment...")
+  reticulate::virtualenv_install(
+    envname = "r-reticulate",
+    packages = "toolchest_client",
+    ignore_installed = TRUE
+  )
+  toolchest_client <<- reticulate::import("toolchest_client", delay_load = TRUE)
+  return(toolchest_client)
+}
+
 python_is_compatible <- function(python_path) {
   MIN_PYTHON_VERSION <- "3.6"
 
-  Sys.setenv(RETICULATE_PYTHON = python_path)
-  path_is_python <- try(python_info <- reticulate::py_discover_config(), silent = TRUE)
-  Sys.unsetenv("RETICULATE_PYTHON")
-  if (class(path_is_python) == "try-error") {
+  path_is_python <- tryCatch(python_info <- reticulate::py_discover_config(), silent = TRUE)
+  if (inherits(path_is_python, "try-error")) {
     return(FALSE)
   }
 
@@ -79,169 +116,4 @@ python_is_compatible <- function(python_path) {
     return(TRUE)
   }
   return(FALSE)
-}
-
-python_versions_in_path <- function() {
-  python_regex <- "python(3|3.\\d)?$"
-  if (Sys.info()[["sysname"]] == "Windows") {
-    python_regex <- "python(3|3.\\d)?.exe$"
-  }
-
-  found_versions <- NULL
-  path_options <- strsplit(Sys.getenv("PATH"), split = ":")
-  for (path in path_options) {
-    path_versions <- list.files(
-      path = path,
-      pattern = python_regex,
-      full.names = TRUE
-    )
-    found_versions <- c(found_versions, path_versions)
-  }
-
-  return(found_versions)
-}
-
-find_compatible_python <- function() {
-  # Version to be installed on Windows if no compatible python found.
-  PYTHON_VERSION_TO_BE_INSTALLED <- "3.8"
-
-  python_path <- NULL
-
-  # If RETICULATE_PYTHON is set, check that Python first.
-  preset_python <- Sys.getenv("RETICULATE_PYTHON")
-  if (preset_python != "") {
-    if (python_is_compatible(preset_python)) {
-      Sys.setenv(RETICULATE_PYTHON = preset_python)
-      return(preset_python)
-    }
-    # if python isn't compatible, RETICULATE_PYTHON is unset
-  }
-
-  # List all versions of Python found, from py_discover_config().
-  # If on Mac/Linux, also search along $PATH since reticulate doesn't auto-search.
-  sysname <- Sys.info()[["sysname"]]
-  config_info <- reticulate::py_discover_config()
-  all_versions <- config_info$python_versions
-  if (sysname == "Darwin" || sysname == "Linux") {
-    all_versions <- c(all_versions, python_versions_in_path())
-  }
-
-  for (found_python in all_versions) {
-    if (python_is_compatible(found_python)) {
-      python_path <- found_python
-      break
-    }
-  }
-
-  # If no compatible Python found, try some backup options and/or display a
-  # custom error message depending on OS.
-  if (is.null(python_path)) {
-    error_msg <- paste(
-      "No compatible version of Python (>=3.6) found.",
-      sep = "\n"
-    )
-    packageStartupMessage(error_msg)
-
-    if (sysname == "Windows") {
-      # If on Windows, attempt to install Miniconda if not installed.
-      conda_try <- try(reticulate::conda_list(), silent = TRUE)
-      if (class(conda_try) == "try-error") {
-        packageStartupMessage("No install of Anaconda detected. Installing Miniconda.")
-        reticulate::conda_install(
-          "r-miniconda",
-          python_version = PYTHON_VERSION_TO_BE_INSTALLED
-        )
-        return(reticulate::conda_python("r-miniconda"))
-      }
-    } else {
-      # If on a different OS, redirect user to the INSTALL documentation page.
-      suggestion_msg <- paste(
-        "If problems persist, see the install page for more details and potential fixes: ",
-        "",
-        "  https://github.com/trytoolchest/toolchest-client-r/blob/main/INSTALL.md",
-        "",
-        "or contact Toolchest directly.",
-        sep = "\n"
-      )
-      packageStartupMessage(suggestion_msg)
-    }
-    stop(error_msg, call. = FALSE)
-  }
-
-  return(python_path)
-}
-
-configure_virtualenv <- function(env_name, python_path) {
-  SETUPTOOLS_VERSION <- "58.0.0"
-
-  # Create environment if it doesn't exist.
-  if (!reticulate::virtualenv_exists(env_name)) {
-    # Enforce RETICULATE_PYTHON to be the version passed into the function.
-    # This prevents reticulate's miniconda from overriding it, if present.
-    Sys.setenv(RETICULATE_PYTHON = python_path)
-
-    # Check if the virtualenv module is installed. If not, install it.
-    install_virtualenv_module(python_path)
-
-    packageStartupMessage("Creating Python virtual environment...")
-    reticulate::virtualenv_create(
-      envname = env_name,
-      python = python_path,
-      module = "virtualenv",
-      setuptools_version = SETUPTOOLS_VERSION
-    )
-  }
-
-  # Enforce RETICULATE_PYTHON to be the version in the r-reticulate env,
-  # in order to make any changes to setuptools affect the env python
-  # instead of the version on python_path, if it is different.
-  env_python <- reticulate::virtualenv_python("r-reticulate")
-  Sys.setenv(RETICULATE_PYTHON = env_python)
-
-  # Prompt the user to restart R in case the python version changes.
-  # Note: this only seems to work consistently on Mac/Linux, due to
-  # reticulate choosing conda if present over RETICULATE_PYTHON on Windows.
-  loaded_python <- reticulate::py_config()$python
-  if (env_python != loaded_python) {
-    sysname <- Sys.info()[["sysname"]]
-    if (sysname == "Darwin" || sysname == "Linux") {
-      restart_msg <- paste(
-        "The required Python version differs from the pre-loaded Python.",
-        "Restart R and re-load Toolchest:",
-        "",
-        "  library(toolchest)",
-        "",
-        "Let Toolchest know if this problem persists.",
-        sep = "\n"
-      )
-      stop(restart_msg, call. = FALSE)
-    }
-  }
-  # TODO: add a proper reload check here for Windows, since this is bugged
-  # but doesn't seem to break reticulate:
-  # https://github.com/rstudio/reticulate/issues/568
-
-  # Check the version of setuptools. Reinstall if needed.
-  setuptools_check <- reticulate::py_run_file(system.file("python", "check_setuptools.py", package = "toolchest"))
-
-  if (setuptools_check$reset_setuptools) {
-    packageStartupMessage("Incompatible version of setuptools detected. Reinstalling setuptools...")
-    reticulate::virtualenv_remove(env_name, "setuptools", confirm = FALSE)
-    reticulate::virtualenv_install(env_name, sprintf("setuptools==%s", SETUPTOOLS_VERSION))
-  }
-}
-
-install_virtualenv_module <- function(python) {
-  # NOTE: pip comes bundled with all Python versions 3.4 and above, so
-  # any Python version compatible with Toolchest (>= 3.6) will have pip.
-
-  # Check if the python version has the virtualenv module.
-  virtualenv_check <- system.file("python", "check_virtualenv.py", package = "toolchest")
-  has_virtualenv <- (system2(python, virtualenv_check, stdout = FALSE, stderr = FALSE) == 0L)
-
-  # If virtualenv not present, install it with pip.
-  if (!has_virtualenv) {
-    system2(python, "-m pip install --upgrade --user virtualenv")
-    # TODO: add --no-warn-script-location tag based on pip version
-  }
 }
