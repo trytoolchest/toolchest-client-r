@@ -9,7 +9,8 @@ unicycler(
   read_one = NULL,
   read_two = NULL,
   long_reads = NULL,
-  output_path = NULL
+  output_path = NULL,
+  is_async = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ unicycler(
 \item{long_reads}{Path of input file (FASTA) to be passed in as long reads (-l).}
 
 \item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
+
+\item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
 \value{
 Reference to an object with output location data.

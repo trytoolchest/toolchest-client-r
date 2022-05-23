@@ -4,7 +4,7 @@
 \alias{rapsearch2}
 \title{RAPSearch2 Client}
 \usage{
-rapsearch2(tool_args = "", inputs, output_path = NULL)
+rapsearch2(tool_args = "", inputs, output_path = NULL, is_async = FALSE)
 }
 \arguments{
 \item{tool_args}{(optional) Additional arguments to be passed to RAPSearch2.}
@@ -13,9 +13,11 @@ rapsearch2(tool_args = "", inputs, output_path = NULL)
 
 \item{output_path}{(optional) Base path to where the output file(s) will be downloaded. (Functions the same way as the "-o" tag for Rapsearch.)}
 
+\item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
+
 \item{database_name}{(optional) Name of database to use for RAPSearch2 alignment. Defaults to SeqScreen DB.}
 
-\item{database_version:}{(optional) Version of database to use for RAPSearch2 alignment. Defaults to 1.}
+\item{database_version}{(optional) Version of database to use for RAPSearch2 alignment. Defaults to 1.}
 }
 \value{
 Reference to an object with output location data.

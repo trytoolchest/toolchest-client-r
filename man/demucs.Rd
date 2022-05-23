@@ -4,7 +4,7 @@
 \alias{demucs}
 \title{Demucs Client}
 \usage{
-demucs(tool_args = "", inputs, output_path = NULL)
+demucs(tool_args = "", inputs, output_path = NULL, is_async = FALSE)
 }
 \arguments{
 \item{tool_args}{Additional arguments to be passed to demucs.}
@@ -12,6 +12,8 @@ demucs(tool_args = "", inputs, output_path = NULL)
 \item{inputs}{Path to a file that will be passed in as input. All formats supported by ffmpeg are allowed.}
 
 \item{output_path}{(optional) Path where the output will be downloaded.}
+
+\item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
 \value{
 Reference to an object with output location data.

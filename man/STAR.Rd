@@ -9,8 +9,9 @@ STAR(
   read_one,
   read_two = NULL,
   output_path = NULL,
-  database_name = NULL,
-  database_version = NULL
+  database_name = "GRCh38",
+  database_version = "1",
+  is_async = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ STAR(
 \item{database_name}{(optional) Name (string) of database to use for STAR mapping. Defaults to "GRCh38".}
 
 \item{database_version}{(optional) Version (string) of database to use for STAR mapping.}
+
+\item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
 \value{
 Reference to an object with output location data.

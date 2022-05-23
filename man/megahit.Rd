@@ -9,7 +9,8 @@ megahit(
   read_one = NULL,
   read_two = NULL,
   output_path = NULL,
-  interleaved = NULL
+  interleaved = NULL,
+  is_async = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ megahit(
 \item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
 
 \item{interleaved}{(optional) Path (string) or list of paths for interleaved paired-end files.}
+
+\item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
 \value{
 Reference to an object with output location data.

@@ -10,7 +10,8 @@ kraken2(
   read_two = NULL,
   output_path = NULL,
   database_name = "standard",
-  database_version = "1"
+  database_version = "1",
+  is_async = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ kraken2(
 \item{database_name}{(optional) Name (string) of database to use for Kraken 2 alignment.}
 
 \item{database_version}{(optional) Version (string) of database to use for Kraken 2 alignment.}
+
+\item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
 \value{
 Reference to an object with output location data.

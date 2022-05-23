@@ -4,7 +4,7 @@
 \alias{diamond_blastp}
 \title{Diamond BLASTp Client}
 \usage{
-diamond_blastp(tool_args = "", inputs, output_path = NULL)
+diamond_blastp(tool_args = "", inputs, output_path = NULL, is_async = FALSE)
 }
 \arguments{
 \item{tool_args}{Additional arguments to be passed to Diamond BLASTp.}
@@ -12,6 +12,8 @@ diamond_blastp(tool_args = "", inputs, output_path = NULL)
 \item{inputs}{Path to a file that will be passed in as input. FASTA or FASTQ formats are supported (it may be gzip compressed)}
 
 \item{output_path}{(optional) File path where the output will be downloaded. Log file (diamond.log) will be downloaded in the same directory as the out file}
+
+\item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
 \value{
 Reference to an object with output location data.
