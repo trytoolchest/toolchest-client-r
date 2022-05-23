@@ -238,12 +238,12 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' @return Reference to an object with output location data.
 #'
 #' @export
-rapsearch2 <- function(tool_args = "", inputs, output_path = NULL, ...) {
+rapsearch2 <- function(tool_args = "", inputs, output_path = NULL, database_name = "rapsearch2_seqscreen",
+                       database_version = "1", ...) {
   toolchest_args <- c(
     list(
       tool_args = tool_args,
-      read_one = read_one,
-      read_two = read_two,
+      inputs = inputs,
       output_path = output_path,
       database_name = database_name,
       database_version = database_version
