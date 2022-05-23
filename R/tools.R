@@ -1,3 +1,31 @@
+#' Alphafold Client
+#'
+#' Runs AlphaFold via Toolchest.
+#'
+#' @param model_preset (optional) Allows you to choose a specific AlphaFold model from [monomer, monomer_casp14, monomer_ptm, multimer]. Default mode if not provided is monomer.
+#' @param max_template_date (optional) Allows for predicting structure of protiens already in the database by setting a date before it was added in YYYY-MM-DD format. Will use today's date if not provided.
+#' @param use_reduced_dbs: (optional) Uses a smaller version of the BFD database that will reduce run time at the cost of result quality.
+#' @param is_prokaryote_list (optional) takes a list of booleans that determine whether all input sequences in the given fasta file are prokaryotic. Expects the string that would normally input into AlphaFold (e.g. "true,true" if there are two prokaryote inputs)
+#' @param inputs Path or list of paths (client-side) to be passed in as input.
+#' @param output_path (optional) Path to directory where the output file(s) will be downloaded
+#'
+#' @return Reference to an object with output location data.
+#'
+#' @export
+alphafold <- function(inputs, output_path = NULL, model_preset = NULL, max_template_date = NULL,
+                      use_reduced_dbs = FALSE, is_prokaryote_list = NULL) {
+  toolchest_args <- list(
+    inputs = inputs,
+    output_path = output_path,
+    model_preset = model_preset,
+    max_template_date = max_template_date,
+    use_reduced_dbs = use_reduced_dbs,
+    is_prokaryote_list = is_prokaryote_list
+  )
+  output <- .do.toolchest.call(toolchest_client$alphafold, toolchest_args)
+  return(output)
+}
+
 #' Bowtie 2 Client
 #'
 #' Starts a query for Bowtie 2 (for alignment) using Toolchest.
@@ -21,6 +49,86 @@ bowtie2 <- function(tool_args = "", inputs, output_path = NULL, database_name, d
     tool_args = tool_args
   )
   output <- .do.toolchest.call(toolchest_client$bowtie2, toolchest_args)
+  return(output)
+}
+
+#' Clustal Omega Client
+#'
+#' Runs Clustal Omega via Toolchest.
+#'
+#' @param inputs Path (client-side) to a FASTA file that will be passed in as input.
+#' @param output_path (optional) Path (client-side) where the output file will be downloaded.
+#' @param tool_args Additional arguments to be passed to Clustal Omega.
+#' @return Reference to an object with output location data.
+#'
+#' @export
+clustalo <- function(tool_args = "", inputs, output_path = NULL) {
+  toolchest_args <- list(
+    inputs = inputs,
+    output_path = output_path,
+    tool_args = tool_args
+  )
+  output <- .do.toolchest.call(toolchest_client$clustalo, toolchest_args)
+  return(output)
+}
+
+#' Demucs Client
+#'
+#' Runs Demucs via Toolchest.
+#'
+#' @param inputs Path to a file that will be passed in as input. All formats supported by ffmpeg are allowed.
+#' @param output_path (optional) Path where the output will be downloaded.
+#' @param tool_args Additional arguments to be passed to demucs.
+#' @return Reference to an object with output location data.
+#'
+#' @export
+demucs <- function(tool_args = "", inputs, output_path = NULL) {
+  toolchest_args <- list(
+    inputs = inputs,
+    output_path = output_path,
+    tool_args = tool_args
+  )
+  output <- .do.toolchest.call(toolchest_client$demucs, toolchest_args)
+  return(output)
+}
+
+#' Diamond BLASTp Client
+#'
+#' Runs Diamond in BLASTp mode via Toolchest.
+#'
+#' @param inputs Path to a file that will be passed in as input. FASTA or FASTQ formats are supported (it may be gzip compressed)
+#' @param output_path (optional) File path where the output will be downloaded. Log file (diamond.log) will be downloaded in the same directory as the out file
+#' @param tool_args Additional arguments to be passed to Diamond BLASTp.
+#' @return Reference to an object with output location data.
+#'
+#' @export
+diamond_blastp <- function(tool_args = "", inputs, output_path = NULL) {
+  toolchest_args <- list(
+    inputs = inputs,
+    output_path = output_path,
+    tool_args = tool_args
+  )
+  output <- .do.toolchest.call(toolchest_client$diamond_blastp, toolchest_args)
+  return(output)
+}
+
+#' Diamond BLASTx Client
+#'
+#' Runs Diamond in BLASTx mode via Toolchest.
+#'
+#' @param inputs Path to a file that will be passed in as input. FASTA or FASTQ formats are supported (it may be gzip compressed)
+#' @param output_path (optional) File path where the output will be downloaded. Log file (diamond.log) will be downloaded in the same directory as the out file
+#' @param tool_args Additional arguments to be passed to Diamond BLASTx.
+#' @return Reference to an object with output location data.
+#'
+#' @export
+diamond_blastx <- function(tool_args = "", inputs, output_path = NULL) {
+  toolchest_args <- list(
+    inputs = inputs,
+    output_path = output_path,
+    tool_args = tool_args
+  )
+  output <- .do.toolchest.call(toolchest_client$diamond_blastx, toolchest_args)
   return(output)
 }
 
@@ -81,6 +189,31 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
     interleaved = interleaved
   )
   output <- .do.toolchest.call(toolchest_client$megahit, toolchest_args)
+  return(output)
+}
+
+#' RAPSearch2 Client
+#'
+#' Runs Diamond in BLASTx mode via Toolchest.
+#'
+#' @param inputs Path to a FASTA/FASTQ file that will be passed in as input.
+#' @param output_path (optional) Base path to where the output file(s) will be downloaded. (Functions the same way as the "-o" tag for Rapsearch.)
+#' @param tool_args (optional) Additional arguments to be passed to RAPSearch2.
+#' @param database_name (optional) Name of database to use for RAPSearch2 alignment. Defaults to SeqScreen DB.
+#' @param database_version: (optional) Version of database to use for RAPSearch2 alignment. Defaults to 1.
+#' @return Reference to an object with output location data.
+#'
+#' @export
+rapsearch2 <- function(tool_args = "", inputs, output_path = NULL) {
+  toolchest_args <- list(
+    tool_args = tool_args,
+    read_one = read_one,
+    read_two = read_two,
+    output_path = output_path,
+    database_name = database_name,
+    database_version = database_version
+  )
+  output <- .do.toolchest.call(toolchest_client$rapsearch2, toolchest_args)
   return(output)
 }
 
