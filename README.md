@@ -8,14 +8,15 @@
 [![R-CMD-check](https://github.com/trytoolchest/toolchest-client-r/workflows/R-CMD-check/badge.svg)](https://github.com/trytoolchest/toolchest-client-r/actions)
 <!-- badges: end -->
 
-Toolchest provides APIs for scientific and bioinformatic data analysis.
-It allows you to abstract away the costliness of running tools on your
-own resources by running the same jobs on secure, powerful remote
-servers.
+Toolchest runs computational biology software in the cloud with just a
+few lines of code. You can call Toolchest from anywhere Python or R
+runs, using input files located on your computer or S3.
 
 This package contains the **R** client for using Toolchest. For the
 **Python** client, [see
 here](https://github.com/trytoolchest/toolchest-client-python).
+
+## [Documentation & User Guide](https://docs.trytoolchest.com/docs)
 
 ## Usage
 
@@ -141,9 +142,12 @@ can proceed to load `.Renviron` into your current R session as follows:
 readRenviron("~/.Renviron")
 ```
 
-## Help / Documentation
+## Help / R Studio Documentation
 
-Documentation for each tool can be accessed within R, just like for any
+Visit our main docs page at
+[docs.trytoolchest.com](https://docs.trytoolchest.com/).
+
+Documentation for each tool can also be accessed within R, just like any
 other function in an R package. For help on how to use an individual
 tool, use either of the following:
 
