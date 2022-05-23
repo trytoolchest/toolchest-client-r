@@ -4,7 +4,7 @@
 \alias{diamond_blastx}
 \title{Diamond BLASTx Client}
 \usage{
-diamond_blastx(tool_args = "", inputs, output_path = NULL, is_async = FALSE)
+diamond_blastx(tool_args = "", inputs, output_path = NULL, ...)
 }
 \arguments{
 \item{tool_args}{Additional arguments to be passed to Diamond BLASTx.}

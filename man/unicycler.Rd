@@ -10,7 +10,7 @@ unicycler(
   read_two = NULL,
   long_reads = NULL,
   output_path = NULL,
-  is_async = FALSE
+  ...
 )
 }
 \arguments{

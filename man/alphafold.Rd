@@ -11,7 +11,7 @@ alphafold(
   max_template_date = NULL,
   use_reduced_dbs = FALSE,
   is_prokaryote_list = NULL,
-  is_async = FALSE
+  ...
 )
 }
 \arguments{
@@ -23,11 +23,11 @@ alphafold(
 
 \item{max_template_date}{(optional) Allows for predicting structure of protiens already in the database by setting a date before it was added in YYYY-MM-DD format. Will use today's date if not provided.}
 
+\item{use_reduced_dbs}{(optional) Uses a smaller version of the BFD database that will reduce run time at the cost of result quality.}
+
 \item{is_prokaryote_list}{(optional) takes a list of booleans that determine whether all input sequences in the given fasta file are prokaryotic. Expects the string that would normally input into AlphaFold (e.g. "true,true" if there are two prokaryote inputs)}
 
 \item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
-
-\item{use_reduced_dbs:}{(optional) Uses a smaller version of the BFD database that will reduce run time at the cost of result quality.}
 }
 \value{
 Reference to an object with output location data.

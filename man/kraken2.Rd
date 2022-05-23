@@ -11,7 +11,7 @@ kraken2(
   output_path = NULL,
   database_name = "standard",
   database_version = "1",
-  is_async = FALSE
+  ...
 )
 }
 \arguments{

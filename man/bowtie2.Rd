@@ -10,7 +10,7 @@ bowtie2(
   output_path = NULL,
   database_name = "GRCh38_noalt_as",
   database_version = "1",
-  is_async = FALSE
+  ...
 )
 }
 \arguments{

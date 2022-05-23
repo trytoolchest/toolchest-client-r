@@ -11,7 +11,7 @@ STAR(
   output_path = NULL,
   database_name = "GRCh38",
   database_version = "1",
-  is_async = FALSE
+  ...
 )
 }
 \arguments{

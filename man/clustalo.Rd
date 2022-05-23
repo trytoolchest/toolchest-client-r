@@ -4,7 +4,7 @@
 \alias{clustalo}
 \title{Clustal Omega Client}
 \usage{
-clustalo(tool_args = "", inputs, output_path = NULL, is_async = FALSE)
+clustalo(tool_args = "", inputs, output_path = NULL, ...)
 }
 \arguments{
 \item{tool_args}{Additional arguments to be passed to Clustal Omega.}

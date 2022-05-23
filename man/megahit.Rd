@@ -10,7 +10,7 @@ megahit(
   read_two = NULL,
   output_path = NULL,
   interleaved = NULL,
-  is_async = FALSE
+  ...
 )
 }
 \arguments{

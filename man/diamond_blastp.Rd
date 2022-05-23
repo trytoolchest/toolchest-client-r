@@ -4,7 +4,7 @@
 \alias{diamond_blastp}
 \title{Diamond BLASTp Client}
 \usage{
-diamond_blastp(tool_args = "", inputs, output_path = NULL, is_async = FALSE)
+diamond_blastp(tool_args = "", inputs, output_path = NULL, ...)
 }
 \arguments{
 \item{tool_args}{Additional arguments to be passed to Diamond BLASTp.}

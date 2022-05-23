@@ -4,7 +4,7 @@
 #'
 #' @param model_preset (optional) Allows you to choose a specific AlphaFold model from [monomer, monomer_casp14, monomer_ptm, multimer]. Default mode if not provided is monomer.
 #' @param max_template_date (optional) Allows for predicting structure of protiens already in the database by setting a date before it was added in YYYY-MM-DD format. Will use today's date if not provided.
-#' @param use_reduced_dbs: (optional) Uses a smaller version of the BFD database that will reduce run time at the cost of result quality.
+#' @param use_reduced_dbs (optional) Uses a smaller version of the BFD database that will reduce run time at the cost of result quality.
 #' @param is_prokaryote_list (optional) takes a list of booleans that determine whether all input sequences in the given fasta file are prokaryotic. Expects the string that would normally input into AlphaFold (e.g. "true,true" if there are two prokaryote inputs)
 #' @param inputs Path or list of paths (client-side) to be passed in as input.
 #' @param output_path (optional) Path to directory where the output file(s) will be downloaded
@@ -14,14 +14,17 @@
 #'
 #' @export
 alphafold <- function(inputs, output_path = NULL, model_preset = NULL, max_template_date = NULL,
-                      use_reduced_dbs = FALSE, is_prokaryote_list = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    inputs = inputs,
-    output_path = output_path,
-    model_preset = model_preset,
-    max_template_date = max_template_date,
-    use_reduced_dbs = use_reduced_dbs,
-    is_prokaryote_list = is_prokaryote_list
+                      use_reduced_dbs = FALSE, is_prokaryote_list = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      model_preset = model_preset,
+      max_template_date = max_template_date,
+      use_reduced_dbs = use_reduced_dbs,
+      is_prokaryote_list = is_prokaryote_list
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$alphafold, toolchest_args)
   return(output)
@@ -43,13 +46,16 @@ alphafold <- function(inputs, output_path = NULL, model_preset = NULL, max_templ
 #'
 #' @export
 bowtie2 <- function(tool_args = "", inputs, output_path = NULL, database_name = "GRCh38_noalt_as",
-                    database_version = "1", is_async = FALSE) {
-  toolchest_args <- list(
-    inputs = inputs,
-    output_path = output_path,
-    database_name = database_name,
-    database_version = database_version,
-    tool_args = tool_args
+                    database_version = "1", ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      database_name = database_name,
+      database_version = database_version,
+      tool_args = tool_args
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$bowtie2, toolchest_args)
   return(output)
@@ -66,11 +72,14 @@ bowtie2 <- function(tool_args = "", inputs, output_path = NULL, database_name = 
 #' @return Reference to an object with output location data.
 #'
 #' @export
-clustalo <- function(tool_args = "", inputs, output_path = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    inputs = inputs,
-    output_path = output_path,
-    tool_args = tool_args
+clustalo <- function(tool_args = "", inputs, output_path = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      tool_args = tool_args
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$clustalo, toolchest_args)
   return(output)
@@ -87,11 +96,14 @@ clustalo <- function(tool_args = "", inputs, output_path = NULL, is_async = FALS
 #' @return Reference to an object with output location data.
 #'
 #' @export
-demucs <- function(tool_args = "", inputs, output_path = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    inputs = inputs,
-    output_path = output_path,
-    tool_args = tool_args
+demucs <- function(tool_args = "", inputs, output_path = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      tool_args = tool_args
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$demucs, toolchest_args)
   return(output)
@@ -108,11 +120,14 @@ demucs <- function(tool_args = "", inputs, output_path = NULL, is_async = FALSE)
 #' @return Reference to an object with output location data.
 #'
 #' @export
-diamond_blastp <- function(tool_args = "", inputs, output_path = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    inputs = inputs,
-    output_path = output_path,
-    tool_args = tool_args
+diamond_blastp <- function(tool_args = "", inputs, output_path = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      tool_args = tool_args
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$diamond_blastp, toolchest_args)
   return(output)
@@ -129,11 +144,14 @@ diamond_blastp <- function(tool_args = "", inputs, output_path = NULL, is_async 
 #' @return Reference to an object with output location data.
 #'
 #' @export
-diamond_blastx <- function(tool_args = "", inputs, output_path = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    inputs = inputs,
-    output_path = output_path,
-    tool_args = tool_args
+diamond_blastx <- function(tool_args = "", inputs, output_path = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      tool_args = tool_args
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$diamond_blastx, toolchest_args)
   return(output)
@@ -160,14 +178,17 @@ diamond_blastx <- function(tool_args = "", inputs, output_path = NULL, is_async 
 #'
 #' @export
 kraken2 <- function(tool_args = "", read_one, read_two = NULL, output_path = NULL,
-                    database_name = "standard", database_version = "1", is_async = FALSE) {
-  toolchest_args <- list(
-    tool_args = tool_args,
-    read_one = read_one,
-    read_two = read_two,
-    output_path = output_path,
-    database_name = database_name,
-    database_version = database_version
+                    database_name = "standard", database_version = "1", ...) {
+  toolchest_args <- c(
+    list(
+      tool_args = tool_args,
+      read_one = read_one,
+      read_two = read_two,
+      output_path = output_path,
+      database_name = database_name,
+      database_version = database_version
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$kraken2, toolchest_args)
   return(output)
@@ -189,13 +210,16 @@ kraken2 <- function(tool_args = "", read_one, read_two = NULL, output_path = NUL
 #'
 #' @export
 megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_path = NULL,
-                    interleaved = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    tool_args = tool_args,
-    read_one = read_one,
-    read_two = read_two,
-    output_path = output_path,
-    interleaved = interleaved
+                    interleaved = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      tool_args = tool_args,
+      read_one = read_one,
+      read_two = read_two,
+      output_path = output_path,
+      interleaved = interleaved
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$megahit, toolchest_args)
   return(output)
@@ -214,14 +238,17 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' @return Reference to an object with output location data.
 #'
 #' @export
-rapsearch2 <- function(tool_args = "", inputs, output_path = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    tool_args = tool_args,
-    read_one = read_one,
-    read_two = read_two,
-    output_path = output_path,
-    database_name = database_name,
-    database_version = database_version
+rapsearch2 <- function(tool_args = "", inputs, output_path = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      tool_args = tool_args,
+      read_one = read_one,
+      read_two = read_two,
+      output_path = output_path,
+      database_name = database_name,
+      database_version = database_version
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$rapsearch2, toolchest_args)
   return(output)
@@ -249,14 +276,17 @@ rapsearch2 <- function(tool_args = "", inputs, output_path = NULL, is_async = FA
 #'
 #' @export
 STAR <- function(tool_args = "", read_one, read_two = NULL, output_path = NULL,
-                 database_name = "GRCh38", database_version = "1", is_async = FALSE) {
-  toolchest_args <- list(
-    tool_args = tool_args,
-    read_one = read_one,
-    read_two = read_two,
-    output_path = output_path,
-    database_name = database_name,
-    database_version = database_version
+                 database_name = "GRCh38", database_version = "1", ...) {
+  toolchest_args <- c(
+    list(
+      tool_args = tool_args,
+      read_one = read_one,
+      read_two = read_two,
+      output_path = output_path,
+      database_name = database_name,
+      database_version = database_version
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$STAR, toolchest_args)
   return(output)
@@ -275,11 +305,14 @@ STAR <- function(tool_args = "", read_one, read_two = NULL, output_path = NULL,
 #' @return Reference to an object with output location data.
 #'
 #' @export
-test <- function(tool_args = "", inputs, output_path = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    inputs = inputs,
-    output_path = output_path,
-    tool_args = tool_args
+test <- function(tool_args = "", inputs, output_path = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      tool_args = tool_args
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$test, toolchest_args)
   return(output)
@@ -308,13 +341,16 @@ test <- function(tool_args = "", inputs, output_path = NULL, is_async = FALSE) {
 #'
 #' @export
 unicycler <- function(tool_args = "", read_one = NULL, read_two = NULL,
-                      long_reads = NULL, output_path = NULL, is_async = FALSE) {
-  toolchest_args <- list(
-    output_path = output_path,
-    read_one = read_one,
-    read_two = read_two,
-    long_reads = long_reads,
-    tool_args = tool_args
+                      long_reads = NULL, output_path = NULL, ...) {
+  toolchest_args <- c(
+    list(
+      output_path = output_path,
+      read_one = read_one,
+      read_two = read_two,
+      long_reads = long_reads,
+      tool_args = tool_args
+    ),
+    list(...)
   )
   output <- .do.toolchest.call(toolchest_client$unicycler, toolchest_args)
   return(output)
