@@ -74,7 +74,7 @@ install_with_conda <- function() {
 
 install_with_virtualenv <- function() {
   # TODO: deprecate assigning a default version with reticulate 1.25
-  PYTHON_VERSION <- "3.8.7"
+  PYTHON_VERSION <- "3.8"
 
   # (Reticulate 1.25+ defaults to latest version of Python, or at least 3.8)
   packageStartupMessage("Installing custom Python...")
@@ -105,7 +105,7 @@ install_with_virtualenv <- function() {
 }
 
 python_is_compatible <- function(python_path) {
-  MIN_PYTHON_VERSION <- "3.6"
+  MIN_PYTHON_VERSION <- "3.7"
 
   path_is_python <- tryCatch(python_info <- reticulate::py_discover_config(), silent = TRUE)
   if (inherits(path_is_python, "try-error")) {
