@@ -13,7 +13,9 @@ install_toolchest <- function() {
     # Try a miniconda-based install.
     toolchest_client <- install_with_conda(),
     error = function(cnd) {
-      packageStartupMessage("Miniconda installation failed. Attempting with base Python:")
+      packageStartupMessage("Miniconda installation failed. Original error message:")
+      packageStartupMessage(cnd)
+      packageStartupMessage("Attempting to install with base Python environment...")
       toolchest_client <- install_with_virtualenv()
     }
   )
@@ -42,21 +44,21 @@ install_toolchest <- function() {
 
 install_with_conda <- function() {
   # Install or update miniconda
-  # (Reticulate defaults to Python 3.8 with miniconda)
+  DEFAULT_PYTHON_VERSION <- "3.9"
   packageStartupMessage("Updating conda configuration...")
   miniconda_is_installed <- try(reticulate::install_miniconda(), silent = TRUE)
   if (!("r-reticulate" %in% reticulate::conda_list()$name)) {
-    reticulate::conda_create("r-reticulate")
+    reticulate::conda_create("r-reticulate", python_version = DEFAULT_PYTHON_VERSION)
   }
 
   # Point reticulate to miniconda
   reticulate::use_miniconda("r-reticulate", required = TRUE)
 
-  # If python is out-of-date in miniconda, force reinstall
+  # If python is out-of-date in miniconda, force conda update and env rebuild
   if (!python_is_compatible()) {
     reticulate::conda_remove("r-reticulate")
-    reticulate::install_miniconda(force = TRUE)
-    reticulate::conda_create("r-reticulate")
+    reticulate::miniconda_update()
+    reticulate::conda_create("r-reticulate", python_version = DEFAULT_PYTHON_VERSION)
     reticulate::use_miniconda("r-reticulate", required = TRUE)
   }
 
@@ -73,12 +75,9 @@ install_with_conda <- function() {
 }
 
 install_with_virtualenv <- function() {
-  # TODO: deprecate assigning a default version with reticulate 1.25
-  PYTHON_VERSION <- "3.8.7"
-
-  # (Reticulate 1.25+ defaults to latest version of Python, or at least 3.8)
+  # (Reticulate 1.25+ defaults to latest patch of Python 3.9)
   packageStartupMessage("Installing custom Python...")
-  python_path <- reticulate::install_python(version = PYTHON_VERSION)
+  python_path <- reticulate::install_python()
 
   packageStartupMessage("Creating custom environment...")
   reticulate::virtualenv_create("r-reticulate", python = python_path)
@@ -105,7 +104,7 @@ install_with_virtualenv <- function() {
 }
 
 python_is_compatible <- function(python_path) {
-  MIN_PYTHON_VERSION <- "3.6"
+  MIN_PYTHON_VERSION <- "3.7"
 
   path_is_python <- tryCatch(python_info <- reticulate::py_discover_config(), silent = TRUE)
   if (inherits(path_is_python, "try-error")) {
