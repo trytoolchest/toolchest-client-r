@@ -13,7 +13,9 @@ install_toolchest <- function() {
     # Try a miniconda-based install.
     toolchest_client <- install_with_conda(),
     error = function(cnd) {
-      packageStartupMessage("Miniconda installation failed. Attempting with base Python:")
+      packageStartupMessage("Miniconda installation failed. Original error message:")
+      packageStartupMessage(cnd)
+      packageStartupMessage("Attempting to install with base Python environment...")
       toolchest_client <- install_with_virtualenv()
     }
   )
