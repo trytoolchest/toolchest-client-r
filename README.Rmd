@@ -57,20 +57,7 @@ toolchest::tool_name(
 )
 ```
 
-If these are necessary but not specified, you can select them interactively.
-
-### Tools
-
-Toolchest currently supports the following tools:
-
-- Bowtie 2 (`bowtie2`)
-- Kraken 2 (`kraken2`)
-- MEGAHIT (`megahit`)
-- STAR (`STAR`)
-- Unicycler (`unicycler`)
-
-A `test` function is also supplied, which mimics how using a tool would work in
-Toolchest.
+A list of tools can be found on the [Toolchest docs page](https://docs.trytoolchest.com/docs).
 
 ## [Installation](INSTALL.md)
 
