@@ -67,7 +67,7 @@ library(toolchest)
 
 The R client requires the
 [`reticulate`](https://rstudio.github.io/reticulate/index.html) package,
-version **1.24 or greater**.
+version **1.25 or greater**.
 
 Install or update `reticulate` with:
 
@@ -77,7 +77,7 @@ install.packages("reticulate")
 
 ### Python requirements
 
-The R client requires a version of **Python 3.6 or greater**.
+The R client requires a version of **Python 3.7 or greater**.
 
 A compatible version will automatically be installed via miniconda or
 pyenv, using R’s `reticulate` package.
