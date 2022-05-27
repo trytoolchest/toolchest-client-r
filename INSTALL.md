@@ -15,7 +15,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools") # uncomment to install devtools (prereq package)
-devtools::install_github("trytoolchest/toolchest-client-r")
+devtools::install_github("trytoolchest/toolchest-client-r", dependencies = TRUE)
 library(toolchest)
 ```
 
@@ -25,7 +25,7 @@ library(toolchest)
 
 The R client requires the
 [`reticulate`](https://rstudio.github.io/reticulate/index.html) package,
-version **1.24 or greater**.
+version **1.25 or greater**.
 
 Install or update `reticulate` with:
 
@@ -35,7 +35,7 @@ install.packages("reticulate")
 
 ### Python
 
-The R client requires a version of **Python 3.6 or greater**.
+The R client requires a version of **Python 3.7 or greater**.
 
 A compatible version will automatically be installed via miniconda or
 pyenv, using R’s `reticulate` package.
@@ -51,7 +51,7 @@ is out-of-date. Check the package version:
 packageVersion("reticulate")
 ```
 
-If this is not **1.24** or greater, update the package with:
+If this is not **1.25** or greater, update the package with:
 
 ``` r
 install.packages("reticulate")

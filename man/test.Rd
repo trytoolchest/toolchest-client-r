@@ -4,7 +4,7 @@
 \alias{test}
 \title{Test Pipeline Segment}
 \usage{
-test(tool_args = "", inputs, output_path = NULL)
+test(tool_args = "", inputs, output_path = NULL, ...)
 }
 \arguments{
 \item{tool_args}{Additional arguments, present to maintain a consistent interface. This is disregarded.}
@@ -12,6 +12,8 @@ test(tool_args = "", inputs, output_path = NULL)
 \item{inputs}{Path or list of paths (client-side) to be passed in as input.}
 
 \item{output_path}{(optional) Path to a directory where the output file(s) will be downloaded.}
+
+\item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
 \value{
 Reference to an object with output location data.
