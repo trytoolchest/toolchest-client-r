@@ -4,14 +4,22 @@
 \alias{clustalo}
 \title{Clustal Omega Client}
 \usage{
-clustalo(tool_args = "", inputs, output_path = NULL, ...)
+clustalo(
+  tool_args = "",
+  inputs,
+  output_path = NULL,
+  output_primary_name = NULL,
+  ...
+)
 }
 \arguments{
 \item{tool_args}{Additional arguments to be passed to Clustal Omega.}
 
 \item{inputs}{Path (client-side) to a FASTA file that will be passed in as input.}
 
-\item{output_path}{(optional) Path (client-side) where the output file will be downloaded.}
+\item{output_path}{(optional) Path to directory where the output file(s) will be downloaded.}
+
+\item{output_primary_name}{(optional) Base name of output file.}
 
 \item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
