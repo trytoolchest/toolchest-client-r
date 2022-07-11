@@ -1,6 +1,6 @@
 Package: toolchest
 Title: R Client for Toolchest
-Version: 0.9.14
+Version: 0.9.18
 Authors@R: c(
     person(given = "Bryce",
            family = "Cai",
