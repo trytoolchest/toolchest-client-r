@@ -30,6 +30,39 @@ alphafold <- function(inputs, output_path = NULL, model_preset = NULL, max_templ
   return(output)
 }
 
+#' BLASTM Client
+#'
+#' Runs BLASTN via Toolchest.
+#'
+#' If `output_path` is left unspecified, downloading will be skipped.
+#'
+#' @param tool_args (optional) Additional arguments to be passed to BLASTN.
+#' @param inputs Path to a file that will be passed in as input. Only FASTA formats are supported.
+#' @param output_path (optional) Path to a directory where the output file(s) will be downloaded.
+#' @param output_primary_name (optional) Base name of output file. Defaults to `blastn_results_out`.
+#' @param database_name (optional) (optional) Name of database to use for BLASTN. Defaults to `blastn_nt`.
+#' @param database_version (optional) Version of database to use for BLASTN. Defaults to `1`.
+#' @param is_async (optional) Whether to run a job asynchronously. Defaults to false.
+#' @return Reference to an object with output location data.
+#'
+#' @export
+bowtie2 <- function(tool_args = "", inputs, output_path = NULL, output_primary_name = NULL,
+                    database_name = "GRCh38_noalt_as", database_version = "1", ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      output_primary_name = output_primary_name,
+      database_name = database_name,
+      database_version = database_version,
+      tool_args = tool_args
+    ),
+    list(...)
+  )
+  output <- .do.toolchest.call(toolchest_client$blastn, toolchest_args)
+  return(output)
+}
+
 #' Bowtie 2 Client
 #'
 #' Starts a query for Bowtie 2 (for alignment) using Toolchest.
@@ -66,17 +99,20 @@ bowtie2 <- function(tool_args = "", inputs, output_path = NULL, database_name = 
 #' Runs Clustal Omega via Toolchest.
 #'
 #' @param inputs Path (client-side) to a FASTA file that will be passed in as input.
-#' @param output_path (optional) Path (client-side) where the output file will be downloaded.
+#' @param output_path (optional) Path to directory where the output file(s) will be downloaded.
+#' @param output_primary_name (optional) Base name of output file.
 #' @param tool_args Additional arguments to be passed to Clustal Omega.
 #' @param is_async (optional) Whether to run a job asynchronously. Defaults to false.
 #' @return Reference to an object with output location data.
 #'
 #' @export
-clustalo <- function(tool_args = "", inputs, output_path = NULL, ...) {
+clustalo <- function(tool_args = "", inputs, output_path = NULL,
+                     output_primary_name = NULL, ...) {
   toolchest_args <- c(
     list(
       inputs = inputs,
       output_path = output_path,
+      output_primary_name = output_primary_name,
       tool_args = tool_args
     ),
     list(...)
@@ -114,17 +150,21 @@ demucs <- function(tool_args = "", inputs, output_path = NULL, ...) {
 #' Runs Diamond in BLASTp mode via Toolchest.
 #'
 #' @param inputs Path to a file that will be passed in as input. FASTA or FASTQ formats are supported (it may be gzip compressed)
-#' @param output_path (optional) File path where the output will be downloaded. Log file (diamond.log) will be downloaded in the same directory as the out file
+#' @param output_path (optional) (optional) Path to directory where the output file(s) will be downloaded.
+#'   Log file (diamond.log) will be downloaded in the same directory as the out file(s).
+#' @param output_primary_name (optional) Base name of output file.
 #' @param tool_args Additional arguments to be passed to Diamond BLASTp.
 #' @param is_async (optional) Whether to run a job asynchronously. Defaults to false.
 #' @return Reference to an object with output location data.
 #'
 #' @export
-diamond_blastp <- function(tool_args = "", inputs, output_path = NULL, ...) {
+diamond_blastp <- function(tool_args = "", inputs, output_path = NULL,
+                           output_primary_name = NULL, ...) {
   toolchest_args <- c(
     list(
       inputs = inputs,
       output_path = output_path,
+      output_primary_name = output_primary_name,
       tool_args = tool_args
     ),
     list(...)
@@ -138,17 +178,21 @@ diamond_blastp <- function(tool_args = "", inputs, output_path = NULL, ...) {
 #' Runs Diamond in BLASTx mode via Toolchest.
 #'
 #' @param inputs Path to a file that will be passed in as input. FASTA or FASTQ formats are supported (it may be gzip compressed)
-#' @param output_path (optional) File path where the output will be downloaded. Log file (diamond.log) will be downloaded in the same directory as the out file
+#' @param output_path (optional) (optional) Path to directory where the output file(s) will be downloaded.
+#'   Log file (diamond.log) will be downloaded in the same directory as the out file(s).
+#' @param output_primary_name (optional) Base name of output file.
 #' @param tool_args Additional arguments to be passed to Diamond BLASTx.
 #' @param is_async (optional) Whether to run a job asynchronously. Defaults to false.
 #' @return Reference to an object with output location data.
 #'
 #' @export
-diamond_blastx <- function(tool_args = "", inputs, output_path = NULL, ...) {
+diamond_blastx <- function(tool_args = "", inputs, output_path = NULL,
+                           output_primary_name = NULL, ...) {
   toolchest_args <- c(
     list(
       inputs = inputs,
       output_path = output_path,
+      output_primary_name = output_primary_name,
       tool_args = tool_args
     ),
     list(...)
@@ -230,7 +274,9 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' Runs Diamond in BLASTx mode via Toolchest.
 #'
 #' @param inputs Path to a FASTA/FASTQ file that will be passed in as input.
-#' @param output_path (optional) Base path to where the output file(s) will be downloaded. (Functions the same way as the "-o" tag for Rapsearch.)
+#' @param output_path (optional) Path (client-side) to a directory where the output files will be downloaded.
+#' @param output_primary_name (optional) Base name of output file(s).
+#'   (Functions the same way as the "-o" tag for RAPSearch2, in combination with `output_path`.)
 #' @param tool_args (optional) Additional arguments to be passed to RAPSearch2.
 #' @param database_name (optional) Name of database to use for RAPSearch2 alignment. Defaults to SeqScreen DB.
 #' @param database_version (optional) Version of database to use for RAPSearch2 alignment. Defaults to 1.
@@ -238,13 +284,14 @@ megahit <- function(tool_args = "", read_one = NULL, read_two = NULL, output_pat
 #' @return Reference to an object with output location data.
 #'
 #' @export
-rapsearch2 <- function(tool_args = "", inputs, output_path = NULL, database_name = "rapsearch2_seqscreen",
-                       database_version = "1", ...) {
+rapsearch2 <- function(tool_args = "", inputs, output_path = NULL, output_primary_name = NULL,
+                       database_name = "rapsearch2_seqscreen", database_version = "1", ...) {
   toolchest_args <- c(
     list(
       tool_args = tool_args,
       inputs = inputs,
       output_path = output_path,
+      output_primary_name = output_primary_name,
       database_name = database_name,
       database_version = database_version
     ),

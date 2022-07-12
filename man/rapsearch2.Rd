@@ -4,14 +4,25 @@
 \alias{rapsearch2}
 \title{RAPSearch2 Client}
 \usage{
-rapsearch2(tool_args = "", inputs, output_path = NULL, ...)
+rapsearch2(
+  tool_args = "",
+  inputs,
+  output_path = NULL,
+  output_primary_name = NULL,
+  database_name = "rapsearch2_seqscreen",
+  database_version = "1",
+  ...
+)
 }
 \arguments{
 \item{tool_args}{(optional) Additional arguments to be passed to RAPSearch2.}
 
 \item{inputs}{Path to a FASTA/FASTQ file that will be passed in as input.}
 
-\item{output_path}{(optional) Base path to where the output file(s) will be downloaded. (Functions the same way as the "-o" tag for Rapsearch.)}
+\item{output_path}{(optional) Path (client-side) to a directory where the output files will be downloaded.}
+
+\item{output_primary_name}{(optional) Base name of output file(s).
+(Functions the same way as the "-o" tag for RAPSearch2, in combination with \code{output_path}.)}
 
 \item{database_name}{(optional) Name of database to use for RAPSearch2 alignment. Defaults to SeqScreen DB.}
 
