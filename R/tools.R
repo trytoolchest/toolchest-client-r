@@ -30,6 +30,39 @@ alphafold <- function(inputs, output_path = NULL, model_preset = NULL, max_templ
   return(output)
 }
 
+#' BLASTM Client
+#'
+#' Runs BLASTN via Toolchest.
+#'
+#' If `output_path` is left unspecified, downloading will be skipped.
+#'
+#' @param tool_args (optional) Additional arguments to be passed to BLASTN.
+#' @param inputs Path to a file that will be passed in as input. Only FASTA formats are supported.
+#' @param output_path (optional) Path to a directory where the output file(s) will be downloaded.
+#' @param output_primary_name (optional) Base name of output file. Defaults to `blastn_results_out`.
+#' @param database_name (optional) (optional) Name of database to use for BLASTN. Defaults to `blastn_nt`.
+#' @param database_version (optional) Version of database to use for BLASTN. Defaults to `1`.
+#' @param is_async (optional) Whether to run a job asynchronously. Defaults to false.
+#' @return Reference to an object with output location data.
+#'
+#' @export
+bowtie2 <- function(tool_args = "", inputs, output_path = NULL, output_primary_name = NULL,
+                    database_name = "GRCh38_noalt_as", database_version = "1", ...) {
+  toolchest_args <- c(
+    list(
+      inputs = inputs,
+      output_path = output_path,
+      output_primary_name = output_primary_name,
+      database_name = database_name,
+      database_version = database_version,
+      tool_args = tool_args
+    ),
+    list(...)
+  )
+  output <- .do.toolchest.call(toolchest_client$blastn, toolchest_args)
+  return(output)
+}
+
 #' Bowtie 2 Client
 #'
 #' Starts a query for Bowtie 2 (for alignment) using Toolchest.

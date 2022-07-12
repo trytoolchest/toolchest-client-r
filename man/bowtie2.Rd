@@ -2,8 +2,17 @@
 % Please edit documentation in R/tools.R
 \name{bowtie2}
 \alias{bowtie2}
-\title{Bowtie 2 Client}
+\title{BLASTM Client}
 \usage{
+bowtie2(
+  tool_args = "",
+  inputs,
+  output_path = NULL,
+  database_name = "GRCh38_noalt_as",
+  database_version = "1",
+  ...
+)
+
 bowtie2(
   tool_args = "",
   inputs,
@@ -24,14 +33,22 @@ bowtie2(
 
 \item{database_version}{(optional) Version of database to use for Bowtie 2 alignment. Defaults to "1".}
 
+\item{output_primary_name}{(optional) Base name of output file. Defaults to \code{blastn_results_out}.}
+
 \item{is_async}{(optional) Whether to run a job asynchronously. Defaults to false.}
 }
 \value{
 Reference to an object with output location data.
+
+Reference to an object with output location data.
 }
 \description{
+Runs BLASTN via Toolchest.
+
 Starts a query for Bowtie 2 (for alignment) using Toolchest.
 }
 \details{
+If \code{output_path} is left unspecified, downloading will be skipped.
+
 If \code{output_path} is left unspecified, downloading will be skipped.
 }
